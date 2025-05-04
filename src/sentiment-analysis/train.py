@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, accuracy_score
 
-def train(file="/data/RestaurantReviews_HistoricDump.tsv", max_features=1420, test_size=0.20, seed=42):
+def train(file : str ="/data/RestaurantReviews_HistoricDump.tsv", max_features : int = 1420, test_size : float =0.20, seed : int =42) -> None:
 
     # Needs to be connected through model-service to ml-lib for the preprocessing
     X, y = ml_lib.preprocess(file)
