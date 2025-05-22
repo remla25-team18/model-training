@@ -1,0 +1,31 @@
+stages:
+  get_data:
+    cmd: python ./src/data/get_data.py
+    deps:
+    - ./src/data/get_data.py
+    outs:
+    - tmp/corpus.joblib
+    - tmp/y.joblib
+
+  data_preprocess:
+    cmd: python ./src/data/pre_process.py
+    deps:
+    - ./src/data/pre_process.py
+    - tmp/y.joblib
+    outs:
+    - tmp/X.joblib
+    - tmp/cv.joblib
+    
+  train:
+    cmd: python ./src/model/train.py
+    deps:
+    - ./src/model/train.py
+    outs:
+    - tmp/X_test.joblib
+    - tmp/model.joblib
+    - tmp/y_test.joblib
+
+  evaluate:
+    cmd: python ./src/model/evaluate.py
+    deps:
+    - ./src/model/evaluate.py

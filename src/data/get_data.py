@@ -14,5 +14,5 @@ def get_data(training_file_dir, joblib_output_dir):
 
 
 if __name__ == "__main__":
-    get_data("../../data/raw/RestaurantReviews_HistoricDump.tsv", "tmp/")
+    get_data("data/raw/RestaurantReviews_HistoricDump.tsv", "tmp/")
     print("Data saved to tmp directory.")
