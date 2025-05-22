@@ -42,3 +42,9 @@
     [ 19 127]]
     Accuracy:  0.7074074074074074
     ```
+
+6. You can also push and pull the data to and from the remote storage(Google Drive) using:
+    ```bash
+    dvc push
+    dvc pull
+    ```
