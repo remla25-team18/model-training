@@ -4,5 +4,5 @@ scikit-learn==1.6.1
 scipy==1.15.2
 threadpoolctl==3.6.0
 pandas==2.2.3
-lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.4
+lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.5
 dvc==3.59.2

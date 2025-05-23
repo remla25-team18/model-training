@@ -34,8 +34,8 @@ stages:
       size: 10224225
     - path: tmp/cv.joblib
       hash: md5
-      md5: 7dc67d8ee88ac9b2633d0d653afc8253
-      size: 39825
+      md5: 385e79b97842df5ad2d0d3b8995cc701
+      size: 39444
   train:
     cmd: python ./src/model/train.py
     deps:
@@ -50,7 +50,7 @@ stages:
       size: 3067425
     - path: tmp/model.joblib
       hash: md5
-      md5: 2fee1fdb59049e613bbc7129420dcd7e
+      md5: 8098d261627d1c0938127adb68ea9b87
       size: 46215
     - path: tmp/y_test.joblib
       hash: md5

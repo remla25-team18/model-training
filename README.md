@@ -2,25 +2,29 @@
 
 ## Installation
 
-1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment. Choose the version for your operating system.
+1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment. Choose the version for your operating system using `conda --version`, you should see the version of conda installed.
 
 2. Create and activate a new conda environment with Python 3.11:
+
     ```bash
     conda create -n ml python=3.11
     conda activate ml
     ```
 
 3. Install the required packages using pip:
+
     ```bash
     pip install -r requirements.txt
     ```
 
 4. Create `tmp` folder under the root directory of the project. This folder will be used to store joblib output during the stages.
+
     ```bash
     mkdir tmp
     ```
 
 5. Run dvc using `dvc repro`, you should see the following output:
+
     ```plaintext
     Running stage 'get_data':    
     Added stage 'get_data' in 'dvc.yaml'
@@ -44,6 +48,7 @@
     ```
 
 6. You can also push and pull the data to and from the remote storage(Google Drive) using:
+
     ```bash
     dvc push
     dvc pull
