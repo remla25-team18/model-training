@@ -1,11 +1,18 @@
-from joblib import load, dump
+'''
+train.py
+'''
 import datetime
 import os
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
+from joblib import load, dump
 
 
 def train(joblib_output_dir, model_output_dir, test_size: float = 0.30, seed: int = 42):
+    '''
+    Splits the dataset, trains the model and saves it
+    '''
+
     X = load(joblib_output_dir + "X.joblib")
     y = load(joblib_output_dir + "y.joblib")
     cv = load(joblib_output_dir + "cv.joblib")
