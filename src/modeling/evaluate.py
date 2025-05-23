@@ -1,8 +1,10 @@
 from joblib import load
 from sklearn.metrics import confusion_matrix, accuracy_score
+import json
+import os
 
 
-def evaluate(joblib_output_dir):
+def evaluate(joblib_output_dir, json_output_dir):
     model = load(joblib_output_dir + "model.joblib")
     X_test = load(joblib_output_dir + "X_test.joblib")
     y_test = load(joblib_output_dir + "y_test.joblib")
@@ -16,8 +18,18 @@ def evaluate(joblib_output_dir):
     print("Confusion_matrix: ", cm)
     print("Accuracy: ", acc)
 
+    # Save metrics to JSON
+    metrics = {
+        "confusion_matrix": cm.tolist(),  # Convert numpy array to list for JSON serialization
+        "accuracy": acc,
+    }
+    os.makedirs(json_output_dir, exist_ok=True)
+    with open(os.path.join(json_output_dir, "metrics.json"), "w") as f:
+        json.dump(metrics, f)
+
 
 if __name__ == "__main__":
     evaluate(
         joblib_output_dir="tmp/",
+        json_output_dir="metrics/",
     )

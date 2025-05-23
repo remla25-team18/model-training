@@ -71,6 +71,7 @@
 
 
 ## Instructions on how to set up remote storage
+
 In `./src/get_data.py`, you can set up remote storage for DVC. We used Google Drive as remote storage.
 
 The link to the drive folder is automatically set and is open to everyone.

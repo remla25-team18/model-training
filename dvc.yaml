@@ -29,3 +29,6 @@ stages:
     cmd: python ./src/modeling/evaluate.py
     deps:
     - ./src/modeling/evaluate.py
+
+metrics:
+  - metrics/metrics.json
