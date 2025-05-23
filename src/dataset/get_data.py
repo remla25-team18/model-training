@@ -1,6 +1,12 @@
 from joblib import dump
 import pandas as pd
 from lib_ml.preprocess import preprocess_text
+import gdown
+
+
+def download_file_from_google_drive(training_file_dir):
+    gdrive_url = "https://drive.google.com/uc?id=12ibFg0ReSlJYkTpPFbOhkzvZ1TN5bciO"
+    gdown.download(gdrive_url, training_file_dir, quiet=False)
 
 
 def get_data(training_file_dir, joblib_output_dir):
@@ -14,5 +20,6 @@ def get_data(training_file_dir, joblib_output_dir):
 
 
 if __name__ == "__main__":
+    download_file_from_google_drive("data/raw/RestaurantReviews_HistoricDump.tsv")
     get_data("data/raw/RestaurantReviews_HistoricDump.tsv", "tmp/")
     print("Data saved to tmp directory.")

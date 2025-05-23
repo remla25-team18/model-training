@@ -1,12 +1,12 @@
 schema: '2.0'
 stages:
   get_data:
-    cmd: python ./src/data/get_data.py
+    cmd: python ./src/dataset/get_data.py
     deps:
-    - path: ./src/data/get_data.py
+    - path: ./src/dataset/get_data.py
       hash: md5
-      md5: 5a9a956499567fdf059cef4c6e764265
-      size: 553
+      md5: 7f511080d7c6f9a0f809c7fd62c556b1
+      size: 854
     outs:
     - path: tmp/corpus.joblib
       hash: md5
@@ -17,9 +17,9 @@ stages:
       md5: e72f7dc91beee28dbae42e6464fc57ed
       size: 7425
   data_preprocess:
-    cmd: python ./src/data/pre_process.py
+    cmd: python ./src/dataset/pre_process.py
     deps:
-    - path: ./src/data/pre_process.py
+    - path: ./src/dataset/pre_process.py
       hash: md5
       md5: a2e06c816bab26566da58e8e160d4d2a
       size: 662
@@ -34,12 +34,12 @@ stages:
       size: 10224225
     - path: tmp/cv.joblib
       hash: md5
-      md5: 385e79b97842df5ad2d0d3b8995cc701
+      md5: 188edf48624ef20e118033a16befd7cd
       size: 39444
   train:
-    cmd: python ./src/model/train.py
+    cmd: python ./src/modeling/train.py
     deps:
-    - path: ./src/model/train.py
+    - path: ./src/modeling/train.py
       hash: md5
       md5: f9e6af47fc0af9ccfccfe38413436c2c
       size: 1395
@@ -57,9 +57,9 @@ stages:
       md5: da4063a7a8376f91ab8f92bb9b0612ae
       size: 2385
   evaluate:
-    cmd: python ./src/model/evaluate.py
+    cmd: python ./src/modeling/evaluate.py
     deps:
-    - path: ./src/model/evaluate.py
+    - path: ./src/modeling/evaluate.py
       hash: md5
       md5: 067e336e589740f9e3451fb8e93b8c58
       size: 604
