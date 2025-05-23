@@ -2,7 +2,22 @@
 
 ## Installation
 
-1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment. Choose the version for your operating system using `conda --version`, you should see the version of conda installed.
+1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment according to your OS:
+
+    - During installation, **type "yes" when prompted to initialize Miniconda in your shell** (this adds initialization to `.bashrc` or `.bash_profile`).
+    - After installation, reload your shell configuration:
+
+      ```bash
+      source ~/.bashrc
+      ```
+
+    - Verify the installation:
+
+      ```bash
+      conda --version
+      ```
+
+      You should see the installed conda version.
 
 2. Create and activate a new conda environment with Python 3.11:
 
