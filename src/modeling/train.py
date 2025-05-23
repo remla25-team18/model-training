@@ -30,7 +30,6 @@ def train(joblib_output_dir, model_output_dir, test_size: float = 0.30, seed: in
     timestamped_version = now.strftime("%Y%m%d")
 
     # Save the model
-    # TODO: Now locally, should be in GD later
     os.makedirs(model_output_dir, exist_ok=True)
     dump(model, os.path.join(model_output_dir, f"model-{timestamped_version}.pkl"))
     dump(cv, os.path.join(model_output_dir, f"cv-{timestamped_version}.pkl"))
@@ -39,5 +38,5 @@ def train(joblib_output_dir, model_output_dir, test_size: float = 0.30, seed: in
 if __name__ == "__main__":
     train(
         joblib_output_dir="tmp/",
-        model_output_dir="../../models/",
+        model_output_dir="./models/",
     )

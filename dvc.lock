@@ -41,8 +41,8 @@ stages:
     deps:
     - path: ./src/modeling/train.py
       hash: md5
-      md5: f9e6af47fc0af9ccfccfe38413436c2c
-      size: 1395
+      md5: a346bf663958ba422304a7f7d7f2a19d
+      size: 1344
     outs:
     - path: tmp/X_test.joblib
       hash: md5
