@@ -21,4 +21,5 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint src --fail-under=8.0
+          pylint src/dataset
+          pylint src/modeling
