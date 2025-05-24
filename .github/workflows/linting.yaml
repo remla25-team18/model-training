@@ -23,3 +23,13 @@ jobs:
         run: |
           pylint src/dataset
           pylint src/modeling
+
+      - name: Run flake8
+        run: |
+          flake8 src/dataset
+          flake8 src/modeling
+
+      - name: Run bandit
+        run: |
+          bandit -r src/dataset
+          bandit -r src/modeling

@@ -7,6 +7,7 @@ import os
 from joblib import load
 from sklearn.metrics import confusion_matrix, accuracy_score
 
+
 def evaluate(joblib_output_dir, json_output_dir):
     '''
     Evaluates the model
