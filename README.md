@@ -77,21 +77,21 @@ The link to the drive folder is automatically set and is open to everyone.
 
 ## Code Quality
 
-Pylint has a non-standard configuration, which can be checked in pylintrc, and one custom rule for the ML code smell Randomness Uncontrolled, which can be checked in linter_rules/pylint. To run pylint use:
+1. Pylint has a non-standard configuration, which can be checked in pylintrc, and one custom rule for the ML code smell Randomness Uncontrolled, which can be checked in linter_rules/pylint. To run pylint use:
 
     ```bash
     pylint .
     ```
 
-Flake8 had a non-default configuration, which can be checked in linter_rules/flake8. To run flake8 use:
+2. Flake8 had a non-default configuration, which can be checked in linter_rules/flake8. To run flake8 use:
 
     ```bash
     pip install -e linter_rules/flake8 --use-pep517
     flake8 .
     ```
 
-Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
-
+3. Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
+    
     ```bash
     bandit -r .
     ```
