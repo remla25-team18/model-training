@@ -16,24 +16,29 @@ classifiers = [
     
 ]
 dependencies = [
-    "black",
-    "flake8",
-    "ipython",
-    "isort",
-    "jupyterlab",
-    "loguru",
-    "matplotlib",
-    "notebook",
-    "numpy",
-    "pandas",
-    "pip",
-    "pytest",
-    "python-dotenv",
-    "scikit-learn",
-    "tqdm",
-    "typer",
+    "joblib==1.5.0",
+    "numpy==1.24.0", 
+    "scikit-learn==1.6.1",
+    "scipy==1.15.2",
+    "threadpoolctl==3.6.0",
+    "pandas==2.2.3",
+    "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.5",
+    "dvc==3.59.2",
+    "gdown==5.2.0",
+    "pylint==3.3.7",
 ]
 requires-python = "~=3.11.0"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8", 
+    "isort",
+    "pytest",
+    "ipython",
+    "jupyterlab",
+    "notebook",
+]
 
 [tool.black]
 line-length = 99

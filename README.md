@@ -29,7 +29,7 @@
 3. Install the required packages using pip:
 
     ```bash
-    pip install -r requirements.txt
+    pip install -e .
     ```
 
 4. Create `tmp` folder under the root directory of the project. This folder will be used to store joblib output during the stages.
@@ -62,7 +62,13 @@
     Accuracy:  0.7074074074074074
     ```
 
-6. You can also push and pull the data to and from the remote storage(Google Drive) using:
+    The metrics are saved in `metrics.json` file under the `metrics/` directory of the project, you can check the metrics using:
+
+    ```bash
+    dvc metrics show
+    ```
+
+6. [**GDrive secret needed**] You can also push and pull the data to and from the remote storage(Google Drive) using:
 
     ```bash
     dvc push
