@@ -32,13 +32,8 @@
     pip install -e .
     ```
 
-4. Create `tmp` folder under the root directory of the project. This folder will be used to store joblib output during the stages.
 
-    ```bash
-    mkdir tmp
-    ```
-
-5. Run dvc using `dvc repro`, you should see the following output:
+4. Run dvc using `dvc repro`, you should see the following output:
 
     ```plaintext
     Running stage 'get_data':    
@@ -68,7 +63,7 @@
     dvc metrics show
     ```
 
-6. [**GDrive secret needed**] You can also push and pull the data to and from the remote storage(Google Drive) using:
+5. [**GDrive secret needed**] You can also push and pull the data to and from the remote storage(Google Drive) using:
 
     ```bash
     dvc push

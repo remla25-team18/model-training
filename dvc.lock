@@ -5,8 +5,8 @@ stages:
     deps:
     - path: ./src/dataset/get_data.py
       hash: md5
-      md5: 4e58181bc82e9441f94e6d66eff424f9
-      size: 942
+      md5: 422d17c1c0dab6e8ea92b6ee54eb2742
+      size: 999
     outs:
     - path: tmp/corpus.joblib
       hash: md5
