@@ -254,3 +254,4 @@ tmp/
 /tmp
 models/
 metrics/
+data/raw/

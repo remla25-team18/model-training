@@ -32,7 +32,6 @@
     pip install -e .
     ```
 
-
 4. Run dvc using `dvc repro`, you should see the following output:
 
     ```plaintext
@@ -69,7 +68,6 @@
     dvc push
     dvc pull
     ```
-
 
 ## Instructions on how to set up remote storage
 
