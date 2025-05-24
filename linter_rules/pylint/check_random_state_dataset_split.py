@@ -4,12 +4,13 @@ check_random_state_dataset_split.py
 from pylint.checkers.base_checker import BaseChecker
 import astroid
 
+
 class DatasetSplitRandomStateChecker(BaseChecker):
     '''
     Checks if the train_test_split has a random_state set
     '''
     name = "dataset-split-random-state"
-    priority = -1 # lower priority
+    priority = -1  # lower priority
 
     msgs = {
         "W9001": (

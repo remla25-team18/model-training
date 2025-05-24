@@ -3,9 +3,10 @@ check_kwarg_dataset_split.py
 '''
 import ast
 
+
 class DatasetSplitKwargChecker:
     '''
-    Checks whether additional train_test_split function parameters 
+    Checks whether additional train_test_split function parameters
     (aside from the first two) need to use keyword arguments
     '''
     name = "flake8_dataset_split_kwarg_checker"
@@ -15,7 +16,7 @@ class DatasetSplitKwargChecker:
 
     def run(self):
         '''
-        Informs the user when additional train_test_split function parameters 
+        Informs the user when additional train_test_split function parameters
         (aside from the first two) are not using keyword arguments
         '''
         for node in ast.walk(self.tree):
@@ -23,7 +24,7 @@ class DatasetSplitKwargChecker:
                 func_name = getattr(node.func, "id", None)
 
                 if func_name == "train_test_split":
-                    allowed_positional = 2 # the first two parameters (X, y) don't need keywords
+                    allowed_positional = 2  # the first two parameters (X, y) don't need keywords
                     num_positional = len(node.args)
 
                     if num_positional > allowed_positional:
