@@ -21,15 +21,13 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint src/dataset
-          pylint src/modeling
+          pylint .
 
       - name: Run flake8
         run: |
-          flake8 src/dataset
-          flake8 src/modeling
+          pip install -e linter_ml_rules/flake8 --use-pep517
+          flake8 src/
 
       - name: Run bandit
         run: |
-          bandit -r src/dataset
-          bandit -r src/modeling
+          bandit -r src/
