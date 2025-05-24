@@ -29,16 +29,10 @@
 3. Install the required packages using pip:
 
     ```bash
-    pip install -r requirements.txt
+    pip install -e .
     ```
 
-4. Create `tmp` folder under the root directory of the project. This folder will be used to store joblib output during the stages.
-
-    ```bash
-    mkdir tmp
-    ```
-
-5. Run dvc using `dvc repro`, you should see the following output:
+4. Run dvc using `dvc repro`, you should see the following output:
 
     ```plaintext
     Running stage 'get_data':    
@@ -62,16 +56,44 @@
     Accuracy:  0.7074074074074074
     ```
 
-6. You can also push and pull the data to and from the remote storage(Google Drive) using:
+    The metrics are saved in `metrics.json` file under the `metrics/` directory of the project, you can check the metrics using:
+
+    ```bash
+    dvc metrics show
+    ```
+
+5. [**GDrive secret needed**] You can also push and pull the data to and from the remote storage(Google Drive) using:
 
     ```bash
     dvc push
     dvc pull
     ```
 
-
 ## Instructions on how to set up remote storage
 
 In `./src/get_data.py`, you can set up remote storage for DVC. We used Google Drive as remote storage.
 
 The link to the drive folder is automatically set and is open to everyone.
+
+## Code Quality
+
+1. Pylint has a non-standard configuration, which can be checked in pylintrc, and one custom rule for the ML code smell Randomness Uncontrolled, which can be checked in linter_rules/pylint. To run pylint use:
+
+    ```bash
+    pylint .
+    ```
+
+2. Flake8 had a non-default configuration, which can be checked in linter_rules/flake8. To run flake8 use:
+
+    ```bash
+    pip install -e linter_rules/flake8 --use-pep517
+    flake8 .
+    ```
+
+3. Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
+    
+    ```bash
+    bandit -r .
+    ```
+
+All three linters are automatically run as part of the GitHub workflow.

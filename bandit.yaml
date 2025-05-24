@@ -1,0 +1,13 @@
+# Set severity to MEDIUM to catch meaningful issues without too much noise
+severity: MEDIUM
+confidence: MEDIUM
+
+# Ignore noisy or non-critical directories in ML projects:
+exclude_dirs:
+  - tests/
+  - notebooks/       # if you store Jupyter notebooks here
+  - data/            # raw data files should not be scanned
+
+# Skip tests that are common but often false positives or less relevant
+skips:
+  - B101  # assert statements, especially common in tests and dev notebooks

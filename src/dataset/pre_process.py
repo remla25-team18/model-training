@@ -1,3 +1,7 @@
+'''
+pre_process.py
+'''
+
 from joblib import load, dump
 
 # ML imports
@@ -8,6 +12,9 @@ def preprocess(
     joblib_output_dir,
     max_features: int = 1420,
 ):
+    '''
+    Pre-processes the data
+    '''
     # Load data from joblib
     corpus = load(joblib_output_dir + "corpus.joblib")
     y = load(joblib_output_dir + "y.joblib")
