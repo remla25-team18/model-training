@@ -74,3 +74,23 @@
 In `./src/get_data.py`, you can set up remote storage for DVC. We used Google Drive as remote storage.
 
 The link to the drive folder is automatically set and is open to everyone.
+
+## Code Quality
+
+Pylint has a non-standard configuration which can be checked in pylintrc and one custom rule for the ML code smell Randomness Uncontrolled. To run pylint use:
+    ```bash
+    pylint .
+    ```
+
+Flake8 had a non-default configuration, which can be checked in linter_rules/flake8. To run flake8 use:
+    ```bash
+    pip install -e linter_rules/flake8 --use-pep517
+    flake8 .
+    ```
+
+Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
+    ```bash
+    bandit -r .
+    ```
+
+All three linters are automatically run as part of the GitHub workflow.
