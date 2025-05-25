@@ -1,0 +1,33 @@
+name: Linting
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -e .
+
+      - name: Run pylint
+        run: |
+          pylint .
+
+      - name: Run flake8
+        run: |
+          pip install -e linter_rules/flake8 --use-pep517
+          flake8 .
+
+      - name: Run bandit
+        run: |
+          bandit -r .

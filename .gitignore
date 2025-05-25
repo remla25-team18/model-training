@@ -252,3 +252,6 @@ dmypy.json
 
 tmp/
 /tmp
+models/
+metrics/
+data/raw/
