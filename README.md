@@ -1,5 +1,16 @@
 # Model training
-![coverage](coverage.svg)
+
+## Continuous Integration Metrics
+
+The following metrics are automatically updated with each push via GitHub Actions:
+The pytests and coverae report can also be done manually. For the relevant commands, first following the instructions below and then run the command found in the workflow.
+
+| Metric | Badge |
+|--------|-------|
+| **Test Coverage** | ![coverage](coverage.svg) |
+| **Pylint Score** | ![pylint-score](pylint.svg) * |
+
+* work in progress
 
 ## Installation
 
