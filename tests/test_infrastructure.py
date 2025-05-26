@@ -4,7 +4,7 @@ test_infrastructure.py
 
 import pytest
 import os
-from joblib import load, dump
+from joblib import load
 from src.modeling.train import train
 from src.modeling.evaluate import evaluate
 
