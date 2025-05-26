@@ -8,7 +8,7 @@ The following metrics are automatically updated with each push via GitHub Action
 | Metric | Badge |
 |--------|-------|
 | **Test Coverage** | ![coverage](coverage.svg) |
-| **Pylint Score** | TODO |
+| **Pylint Score** | ![pylint-score](pylint.svg) |
 
 
 ## Installation
