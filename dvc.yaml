@@ -5,15 +5,18 @@ stages:
     - ./src/dataset/get_data.py
     outs:
     - tmp/corpus.joblib
-    - tmp/y.joblib
+    - tmp/raw_labels.joblib
 
   data_preprocess:
     cmd: python ./src/dataset/pre_process.py
     deps:
     - ./src/dataset/pre_process.py
-    - tmp/y.joblib
+    - tmp/raw_labels.joblib
+    - tmp/corpus.joblib
     outs:
+    - tmp/corpus_processed.joblib
     - tmp/X.joblib
+    - tmp/y.joblib
     - tmp/cv.joblib
     
   train:
@@ -29,6 +32,11 @@ stages:
     cmd: python ./src/modeling/evaluate.py
     deps:
     - ./src/modeling/evaluate.py
+    - tmp/model.joblib
+    - tmp/X_test.joblib
+    - tmp/y_test.joblib
+    outs:
+    - metrics/metrics.json
 
 metrics:
   - metrics/metrics.json
