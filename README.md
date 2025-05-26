@@ -1,6 +1,16 @@
 # Model training
 ![coverage](coverage.svg)
 
+## Continuous Integration Metrics
+
+The following metrics are automatically updated with each push via GitHub Actions:
+
+| Metric | Badge |
+|--------|-------|
+| **Test Coverage** | ![coverage](coverage.svg) |
+| **Pylint Score** | TODO |
+
+
 ## Installation
 
 1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment according to your OS:
