@@ -51,9 +51,9 @@
 
     Running stage 'evaluate':                                                              
     > python ./src/model/evaluate.py
-    Confusion_matrix:  [[ 64  60]
-    [ 19 127]]
-    Accuracy:  0.7074074074074074
+    Confusion_matrix:  [[ 79  47]
+                        [ 27 117]]
+    Accuracy:  0.725925925925926
     ```
 
     The metrics are saved in `metrics.json` file under the `metrics/` directory of the project, you can check the metrics using:
