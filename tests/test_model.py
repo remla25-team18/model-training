@@ -24,12 +24,14 @@ def model_and_data_setup():
 def test_model_performance(model_and_data_setup):
     """
     Test to ensure the model performs as expected
+    ML Test Score, Model 5: A simpler model is not better
     """
     model, X_test, y_test = model_and_data_setup
     y_pred = model.predict(X_test)
 
     # Baseline accuracy according the the majority class in y_test
     baseline_accuracy = np.unique(y_test, return_counts=True)[1].max() / len(y_test) 
+    print(f"Baseline accuracy: {baseline_accuracy}")
 
     # Check if predictions are of the same length as y_test
     assert len(y_pred) == len(y_test), "Predictions length does not match test labels length"
@@ -44,4 +46,5 @@ def test_model_performance(model_and_data_setup):
 
     # Check if accuracy is above a baseline
     accuracy = (y_pred == y_test).mean()
+    print(f"Model accuracy: {accuracy}")
     assert accuracy >= baseline_accuracy, f"Model accuracy {accuracy} is below baseline {baseline_accuracy}"
