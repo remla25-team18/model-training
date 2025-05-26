@@ -5,8 +5,8 @@ stages:
     deps:
     - path: ./src/dataset/get_data.py
       hash: md5
-      md5: 6cbf4818af2c72c93432a0571c4b4b1c
-      size: 1336
+      md5: 6f07eb983b87a21beedbc8fd43a8dfe1
+      size: 1332
     outs:
     - path: tmp/corpus.joblib
       hash: md5
@@ -21,8 +21,8 @@ stages:
     deps:
     - path: ./src/dataset/pre_process.py
       hash: md5
-      md5: 1216997b5542d5cbd31c09c903c5261c
-      size: 1599
+      md5: 48f6c85238259c6e38c1ac62491806d8
+      size: 1601
     - path: tmp/corpus.joblib
       hash: md5
       md5: 0eec825902a57af520ea457aea67fc7a
@@ -42,7 +42,7 @@ stages:
       size: 34532
     - path: tmp/cv.joblib
       hash: md5
-      md5: 6f835faacd54e9dbb49ca551be0e2db1
+      md5: 56b1c4950543f7a6268e490fdad66a1f
       size: 40514
     - path: tmp/y.joblib
       hash: md5
@@ -53,8 +53,8 @@ stages:
     deps:
     - path: ./src/modeling/train.py
       hash: md5
-      md5: be4d570c6fe067270aa483ba3b9228a8
-      size: 1461
+      md5: dc2f404476cf1bfdf51a2d573bac78b7
+      size: 1432
     outs:
     - path: tmp/X_test.joblib
       hash: md5
@@ -73,8 +73,8 @@ stages:
     deps:
     - path: ./src/modeling/evaluate.py
       hash: md5
-      md5: 8815ecf8e3edd93834b3415227284359
-      size: 1202
+      md5: add598ce7fb5746949534cf56f51f842
+      size: 1093
     - path: tmp/X_test.joblib
       hash: md5
       md5: 31b8014c7019db08decf6864bb2c2287

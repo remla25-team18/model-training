@@ -1,0 +1,41 @@
+name: ML Testing
+
+on: push
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        
+        # Prevent running tests on pushes from GitHub Actions itself to avoid infinite loops
+        if: github.actor != 'github-actions' 
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Set up Python 3.11
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.11'
+
+            - name: Install dependencies
+              run: |
+                pip install -e .[dev]
+
+            # Saving as XML and txt to have both a human-readable and machine-readable format available
+            - name: Run tests with pytest and coverage
+              run: |
+                pytest --cov=src --cov-report=xml --cov-report=term-missing tests/> pytest-coverage.txt
+                cat pytest-coverage.txt
+                coverage-badge -o coverage.svg -f
+            
+            - name: Commit changes
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+                git add coverage.svg
+                if ! git diff --cached --quiet; then
+                    git commit -m "Update coverage badge"
+                    git push
+                else
+                    echo "No changes to commit."
+                fi
