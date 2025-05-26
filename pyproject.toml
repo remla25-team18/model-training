@@ -37,10 +37,14 @@ dev = [
     "flake8", 
     "isort",
     "pytest",
+    "pytest-cov",
     "ipython",
     "jupyterlab",
     "notebook",
 ]
+
+[tool.pytest.ini_options]
+
 
 [tool.black]
 line-length = 99
