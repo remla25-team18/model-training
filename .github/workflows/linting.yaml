@@ -30,4 +30,5 @@ jobs:
 
       - name: Run bandit
         run: |
-          bandit -r .
+          pwd
+          bandit -r . -c bandit.yaml
