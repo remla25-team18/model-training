@@ -22,10 +22,13 @@ dependencies = [
     "scipy==1.15.2",
     "threadpoolctl==3.6.0",
     "pandas==2.2.3",
-    "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.5",
+    "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.6",
     "dvc==3.59.2",
     "gdown==5.2.0",
+    "pytest==8.3.5",
+    "pytest-cov==6.1.1",
     "pylint==3.3.7",
+    "coverage-badge==1.1.2",
     "flake8==7.2.0",
     "bandit==1.8.3",
 ]
@@ -36,11 +39,13 @@ dev = [
     "black",
     "flake8", 
     "isort",
-    "pytest",
     "ipython",
     "jupyterlab",
     "notebook",
 ]
+
+[tool.pytest.ini_options]
+
 
 [tool.black]
 line-length = 99
