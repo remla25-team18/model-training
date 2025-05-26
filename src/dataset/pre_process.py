@@ -8,6 +8,7 @@ import numpy as np
 # ML imports
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 def remove_missing_values(corpus, y):
     """
     Removes missing values from the corpus-label pairs.
@@ -25,6 +26,7 @@ def remove_missing_values(corpus, y):
             cleaned_corpus.append(text)
             cleaned_y.append(label)
     return cleaned_corpus, np.array(cleaned_y)
+
 
 def preprocess(
     joblib_output_dir,

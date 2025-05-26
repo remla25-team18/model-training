@@ -24,7 +24,7 @@ def get_data(training_file_path, joblib_output_dir):
     Parameters:
         - training_file_path: str, path to the training file
         - joblib_output_dir: str, output directory for joblib files
-    
+
     Returns:
         - corpus: list, preprocessed text data
         - y: numpy array, labels of the dataset

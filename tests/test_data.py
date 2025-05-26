@@ -1,9 +1,11 @@
 """
 test_data.py
 """
+
 import pytest
 import numpy as np
 from joblib import load
+
 
 @pytest.fixture()
 def data_setup():
@@ -16,6 +18,7 @@ def data_setup():
     if corpus is None or y is None:
         raise ValueError("Corpus or labels are not loaded correctly.")
     return corpus, y
+
 
 @pytest.fixture()
 def data_test_setup():
@@ -39,6 +42,7 @@ def test_correct_format(data_setup):
     assert len(corpus) > 0, "Corpus should not be empty"
     assert len(y) > 0, "Labels should not be empty"
 
+
 def test_no_missing_values(data_setup):
     """
     Test to ensure there are no missing values in the dataset
@@ -51,6 +55,7 @@ def test_no_missing_values(data_setup):
             print(f"Missing value found in corpus at index {i}")
     assert all(corpus), "Corpus contains missing values"
     assert None not in y, "Labels contain missing values"
+
 
 def test_labels_in_the_test_distributed_proportionally(data_setup, data_test_setup):
     """
@@ -67,14 +72,16 @@ def test_labels_in_the_test_distributed_proportionally(data_setup, data_test_set
     assert len(unique_labels) > 0, "No labels found in the dataset"
 
     # Check if the labels in the test set are a subset of the overall labels
-    assert set(unique_labels_test).issubset(set(unique_labels)), "Test labels are not a subset of overall labels"
+    assert set(unique_labels_test).issubset(
+        set(unique_labels)
+    ), "Test labels are not a subset of overall labels"
 
     # Check if the distribution of labels in the overall dataset is not too skewed
     min_count_prop = min(counts) / total_count
     print(f"Label proportion difference in overall set: \n{counts / total_count}")
     assert min_count_prop > 0.2, "Labels are not distributed proportionally in the overall dataset"
-    
+
     # Check if the distribution is proportional in the test set
-    count_diff_test = (max(counts_test) - min(counts_test))/ total_count_test
+    count_diff_test = (max(counts_test) - min(counts_test)) / total_count_test
     print(f"Label proportion difference in test set: \n{counts_test / total_count_test}")
     assert count_diff_test < 0.2, "Test labels are not distributed proportionally"
