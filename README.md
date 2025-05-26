@@ -1,4 +1,5 @@
 # Model training
+![coverage](coverage.svg)
 
 ## Installation
 
