@@ -24,10 +24,3 @@ jobs:
               run: |
                   pytest --cov=src --cov-report=xml --cov-report=term-missing tests/> pytest-coverage.txt
                   cat pytest-coverage.txt
-
-            - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v4
-              with:
-                files: coverage.xml
-                flags: unittests
-                name: codecov-ml
