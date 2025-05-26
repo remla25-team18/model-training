@@ -21,7 +21,40 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint .
+          SCORE_LINE=$(pylint src | tee pylint-output.txt | tail -n 2 | head -n 1)
+          echo "Pylint score line: $SCORE_LINE"
+
+          # Extract numeric score
+          SCORE=$(echo $SCORE_LINE | grep -oP '[0-9]+(?=\.[0-9]+(?=/10))')
+          echo "Extracted score: $SCORE"
+
+          # Choose color
+          if [ "$SCORE" -ge 9 ]; then
+            COLOR=brightgreen
+          elif [ "$SCORE" -ge 7 ]; then
+            COLOR=yellow
+          else
+            COLOR=red
+          fi
+
+          # Create badge
+          echo "<svg xmlns='http://www.w3.org/2000/svg' width='110' height='20'>
+          <rect width='70' height='20' fill='#555'/>
+          <rect x='70' width='40' height='20' fill='$COLOR'/>
+          <text x='35' y='14' fill='#fff' font-family='Verdana' font-size='11' text-anchor='middle'>pylint</text>
+          <text x='90' y='14' fill='#fff' font-family='Verdana' font-size='11' text-anchor='middle'>${SCORE}/10</text>
+          </svg>" > pylint.svg
+
+      - name: Commit pylint badge
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add pylint.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "Update pylint badge"
+            git push
+          else
+            echo "No changes to commit."
 
       - name: Run flake8
         run: |
