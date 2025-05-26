@@ -30,7 +30,6 @@ def test_model_performance(model_and_data_setup):
 
     # Baseline accuracy according the the majority class in y_test
     baseline_accuracy = np.unique(y_test, return_counts=True)[1].max() / len(y_test) 
-    print(f"Baseline accuracy: {baseline_accuracy}")
 
     # Check if predictions are of the same length as y_test
     assert len(y_pred) == len(y_test), "Predictions length does not match test labels length"
