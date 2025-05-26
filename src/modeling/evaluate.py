@@ -20,7 +20,7 @@ def evaluate(joblib_output_dir, json_output_dir):
     y_pred = model.predict(X_test)
 
     # Evaluate performance
-    cm = confusion_matrix(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
     acc = accuracy_score(y_test, y_pred)
     print("Confusion_matrix: ", cm)
     print("Accuracy: ", acc)

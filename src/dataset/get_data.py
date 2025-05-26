@@ -34,7 +34,7 @@ def get_data(training_file_path, joblib_output_dir):
     y = dataset.iloc[:, -1].values
 
     dump(corpus, joblib_output_dir + "corpus.joblib")
-    dump(y, joblib_output_dir + "y.joblib")
+    dump(y, joblib_output_dir + "raw_labels.joblib")
 
 
 if __name__ == "__main__":
