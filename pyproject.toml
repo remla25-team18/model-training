@@ -22,7 +22,7 @@ dependencies = [
     "scipy==1.15.2",
     "threadpoolctl==3.6.0",
     "pandas==2.2.3",
-    "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.6",
+    "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.8",
     "dvc==3.59.2",
     "gdown==5.2.0",
     "pytest==8.3.5",
@@ -32,6 +32,7 @@ dependencies = [
     "flake8==7.2.0",
     "bandit==1.8.3",
     "pytest==8.3.5",
+    "pytest-cov==6.1.1",
 ]
 requires-python = "~=3.11.0"
 
