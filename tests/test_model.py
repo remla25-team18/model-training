@@ -58,7 +58,8 @@ def test_model_performance(model_and_data_setup):
         accuracy >= baseline_accuracy
     ), f"Model accuracy {accuracy} is below baseline {baseline_accuracy}"
 
-# First and last 4 reviews from the dataset
+
+# test inputs
 @pytest.mark.parametrize(
     "original, transformed, label",
     [
@@ -73,18 +74,16 @@ def test_model_performance(model_and_data_setup):
         ("Amazing", "Terrible", 1),
     ]
 )
-
 def test_metamorphic_review_consistency(model_and_data_setup, original, transformed, label):
     """
-    Test to assess the robustness of the model by ensuring the model performs similarly on semantically equivalent reviews
-    Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (synonyms, e.g. okay vs. ﬁne)
+    Test to assess the model's robustness by ensuring the model performs similarly on semantically equivalent reviews
+    Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (e.g. okay vs. ﬁne)
     """
-
-    model, X_test, y_test = model_and_data_setup
+    model, _, _ = model_and_data_setup
     vectorizer = load("tmp/cv.joblib")
 
-    X_vec = vectorizer.transform([original, transformed]).toarray()
-    preds = model.predict(X_vec)
+    test_inputs = vectorizer.transform([original, transformed]).toarray()
+    preds = model.predict(test_inputs)
 
     # Inconsistent predictions
     assert preds[0] == preds[1], (
@@ -93,6 +92,5 @@ def test_metamorphic_review_consistency(model_and_data_setup, original, transfor
         f"  Transformed: {transformed} -> {preds[1]}"
     )
 
-    # assert preds[0] == label, f"Incorrect prediction for original: '{original}' -> predicted {preds[0]}, expected {label}"
-    # assert preds[1] == label, f"Incorrect prediction for transformed: '{transformed}' -> predicted {preds[1]}, expected {label}"
-
+    assert preds[0] == label, f"Original: '{original}' -> predicted {preds[0]}, expected {label}"
+    assert preds[1] == label, f"Transformed: '{transformed}' -> predicted {preds[1]}, expected {label}"
