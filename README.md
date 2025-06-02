@@ -148,3 +148,23 @@ Ideal output:
     Files skipped (0):
 
 All three linters are automatically run as part of the GitHub workflow.
+
+## Automated Tests
+
+The tests follow the ML Test Score methodology to measeure test adequacy and there is at least one test per category: 
+- Feature and Data in tests/test_data.py;
+- Model Development in tests/test_model.py;
+- ML Infrastructure in tests/test_infrastructure.py;
+- Monitoring in tests/test_monitoring.py.
+
+The model's robustness is tested on semantically equivalent reviews in tests/test_mutamorphic.py.
+
+Non-functional requirements, namely memory usage and latency for prediction, are tested in tests/test_monitoring.py.
+
+To run all tests, use the following command:
+
+```bash
+pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/ | tee pytest-coverage.txt
+```
+
+The coverage report is both printed in the terminal and saved as an XML and txt files, to have both a human-readable and machine-readable format available.

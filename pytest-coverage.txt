@@ -4,127 +4,24 @@ cachedir: .pytest_cache
 rootdir: /home/madaplacido/Desktop/TUD/remla-project/model-training
 configfile: pyproject.toml
 plugins: cov-6.1.1, hydra-core-1.3.2
-collecting ... collected 16 items
+collecting ... collected 13 items
 
-tests/test_data.py::test_correct_format PASSED                           [  6%]
-tests/test_data.py::test_no_missing_values PASSED                        [ 12%]
-tests/test_data.py::test_labels_in_the_test_distributed_proportionally PASSED [ 18%]
-tests/test_infrastructure.py::test_if_files_saved_correctly PASSED       [ 25%]
-tests/test_infrastructure.py::test_reproducibility PASSED                [ 31%]
-tests/test_model.py::test_model_performance PASSED                       [ 37%]
-tests/test_model.py::test_metamorphic_review_consistency[The food was great.-The food was amazing.-1] FAILED [ 43%]
-tests/test_model.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] PASSED [ 50%]
-tests/test_model.py::test_metamorphic_review_consistency[Waited too long.-The wait was very long.-0] PASSED [ 56%]
-tests/test_model.py::test_metamorphic_review_consistency[Staff was friendly.-The staff was nice.-1] PASSED [ 62%]
-tests/test_model.py::test_metamorphic_review_consistency[Pretty loud inside.-Kinda noisy indoors.-0] PASSED [ 68%]
-tests/test_model.py::test_metamorphic_review_consistency[Service was fast.-Service was quick.-1] FAILED [ 75%]
-tests/test_model.py::test_metamorphic_review_consistency[Good drink selection.-Nice variety of drinks.-1] PASSED [ 81%]
-tests/test_model.py::test_metamorphic_review_consistency[The pasta was bland.-The pasta lacked flavor.-0] PASSED [ 87%]
-tests/test_model.py::test_metamorphic_review_consistency[Amazing-Terrible-1] PASSED [ 93%]
-tests/test_monitoring.py::test_data_invariants PASSED                    [100%]
+tests/test_data.py::test_correct_format PASSED                           [  7%]
+tests/test_data.py::test_no_missing_values PASSED                        [ 15%]
+tests/test_data.py::test_labels_in_the_test_distributed_proportionally PASSED [ 23%]
+tests/test_infrastructure.py::test_if_files_saved_correctly PASSED       [ 30%]
+tests/test_infrastructure.py::test_reproducibility PASSED                [ 38%]
+tests/test_model.py::test_model_performance PASSED                       [ 46%]
+tests/test_monitoring.py::test_data_invariants PASSED                    [ 53%]
+tests/test_monitoring.py::test_prediction_memory_usage PASSED            [ 61%]
+tests/test_monitoring.py::test_prediction_latency PASSED                 [ 69%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] PASSED [ 76%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[Waited too long.-The wait was very long.-0] PASSED [ 84%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[Pretty loud inside.-Kinda noisy indoors.-0] PASSED [ 92%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[The pasta was bland.-The pasta lacked flavor.-0] PASSED [100%]
 ERROR: Coverage failure: total of 47 is less than fail-under=50
 
 
-=================================== FAILURES ===================================
-_ test_metamorphic_review_consistency[The food was great.-The food was amazing.-1] _
-
-model_and_data_setup = (GaussianNB(), array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ..., 0, 0, 1, 0, 1, 1,
-       1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0,
-       0, 0, 1, 0, 0, 1]))
-original = 'The food was great.', transformed = 'The food was amazing.'
-label = 1
-
-    @pytest.mark.parametrize(
-        "original, transformed, label",
-        [
-            ("The food was great.", "The food was amazing.", 1),
-            ("A bit too salty.", "Slightly too salty.", 0),
-            ("Waited too long.", "The wait was very long.", 0),
-            ("Staff was friendly.", "The staff was nice.", 1),
-            ("Pretty loud inside.", "Kinda noisy indoors.", 0),
-            ("Service was fast.", "Service was quick.", 1),
-            ("Good drink selection.", "Nice variety of drinks.", 1),
-            ("The pasta was bland.", "The pasta lacked flavor.", 0),
-            ("Amazing", "Terrible", 1),
-        ]
-    )
-    
-    def test_metamorphic_review_consistency(model_and_data_setup, original, transformed, label):
-        """
-        Test to assess the robustness of the model by ensuring the model performs similarly on semantically equivalent reviews
-        Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (synonyms, e.g. okay vs. ﬁne)
-        """
-    
-        model, X_test, y_test = model_and_data_setup
-        vectorizer = load("tmp/cv.joblib")
-    
-        X_vec = vectorizer.transform([original, transformed]).toarray()
-        preds = model.predict(X_vec)
-    
-        # Inconsistent predictions
->       assert preds[0] == preds[1], (
-            f"Inconsistent predictions:\n"
-            f"  Original:    {original} -> {preds[0]}\n"
-            f"  Transformed: {transformed} -> {preds[1]}"
-        )
-E       AssertionError: Inconsistent predictions:
-E           Original:    The food was great. -> 1
-E           Transformed: The food was amazing. -> 0
-E       assert 1 == 0
-
-tests/test_model.py:90: AssertionError
-_ test_metamorphic_review_consistency[Service was fast.-Service was quick.-1] __
-
-model_and_data_setup = (GaussianNB(), array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ..., 0, 0, 1, 0, 1, 1,
-       1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0,
-       0, 0, 1, 0, 0, 1]))
-original = 'Service was fast.', transformed = 'Service was quick.', label = 1
-
-    @pytest.mark.parametrize(
-        "original, transformed, label",
-        [
-            ("The food was great.", "The food was amazing.", 1),
-            ("A bit too salty.", "Slightly too salty.", 0),
-            ("Waited too long.", "The wait was very long.", 0),
-            ("Staff was friendly.", "The staff was nice.", 1),
-            ("Pretty loud inside.", "Kinda noisy indoors.", 0),
-            ("Service was fast.", "Service was quick.", 1),
-            ("Good drink selection.", "Nice variety of drinks.", 1),
-            ("The pasta was bland.", "The pasta lacked flavor.", 0),
-            ("Amazing", "Terrible", 1),
-        ]
-    )
-    
-    def test_metamorphic_review_consistency(model_and_data_setup, original, transformed, label):
-        """
-        Test to assess the robustness of the model by ensuring the model performs similarly on semantically equivalent reviews
-        Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (synonyms, e.g. okay vs. ﬁne)
-        """
-    
-        model, X_test, y_test = model_and_data_setup
-        vectorizer = load("tmp/cv.joblib")
-    
-        X_vec = vectorizer.transform([original, transformed]).toarray()
-        preds = model.predict(X_vec)
-    
-        # Inconsistent predictions
->       assert preds[0] == preds[1], (
-            f"Inconsistent predictions:\n"
-            f"  Original:    {original} -> {preds[0]}\n"
-            f"  Transformed: {transformed} -> {preds[1]}"
-        )
-E       AssertionError: Inconsistent predictions:
-E           Original:    Service was fast. -> 0
-E           Transformed: Service was quick. -> 1
-E       assert 0 == 1
-
-tests/test_model.py:90: AssertionError
 ================================ tests coverage ================================
 _______________ coverage: platform linux, python 3.11.11-final-0 _______________
 
@@ -141,7 +38,4 @@ src/modeling/train.py           24      1    96%   47
 TOTAL                           87     46    47%
 Coverage XML written to file coverage.xml
 FAIL Required test coverage of 50.0% not reached. Total coverage: 47.13%
-=========================== short test summary info ============================
-FAILED tests/test_model.py::test_metamorphic_review_consistency[The food was great.-The food was amazing.-1]
-FAILED tests/test_model.py::test_metamorphic_review_consistency[Service was fast.-Service was quick.-1]
-========================= 2 failed, 14 passed in 1.15s =========================
+============================== 13 passed in 1.06s ==============================
