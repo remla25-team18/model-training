@@ -151,7 +151,7 @@ All three linters are automatically run as part of the GitHub workflow.
 
 ## Automated Tests
 
-The tests follow the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/) methodology to measeure test adequacy and there is at least one test per category: 
+The tests follow the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/) methodology to measure test adequacy and there is at least one test per category: 
 - Feature and Data in tests/test_data.py;
 - Model Development in tests/test_model.py;
 - ML Infrastructure in tests/test_infrastructure.py;
