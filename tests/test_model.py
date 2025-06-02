@@ -57,3 +57,42 @@ def test_model_performance(model_and_data_setup):
     assert (
         accuracy >= baseline_accuracy
     ), f"Model accuracy {accuracy} is below baseline {baseline_accuracy}"
+
+# First and last 4 reviews from the dataset
+@pytest.mark.parametrize(
+    "original, transformed, label",
+    [
+        ("The food was great.", "The food was amazing.", 1),
+        ("A bit too salty.", "Slightly too salty.", 0),
+        ("Waited too long.", "The wait was very long.", 0),
+        ("Staff was friendly.", "The staff was nice.", 1),
+        ("Pretty loud inside.", "Kinda noisy indoors.", 0),
+        ("Service was fast.", "Service was quick.", 1),
+        ("Good drink selection.", "Nice variety of drinks.", 1),
+        ("The pasta was bland.", "The pasta lacked flavor.", 0),
+        ("Amazing", "Terrible", 1),
+    ]
+)
+
+def test_metamorphic_review_consistency(model_and_data_setup, original, transformed, label):
+    """
+    Test to assess the robustness of the model by ensuring the model performs similarly on semantically equivalent reviews
+    Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (synonyms, e.g. okay vs. ﬁne)
+    """
+
+    model, X_test, y_test = model_and_data_setup
+    vectorizer = load("tmp/cv.joblib")
+
+    X_vec = vectorizer.transform([original, transformed]).toarray()
+    preds = model.predict(X_vec)
+
+    # Inconsistent predictions
+    assert preds[0] == preds[1], (
+        f"Inconsistent predictions:\n"
+        f"  Original:    {original} -> {preds[0]}\n"
+        f"  Transformed: {transformed} -> {preds[1]}"
+    )
+
+    # assert preds[0] == label, f"Incorrect prediction for original: '{original}' -> predicted {preds[0]}, expected {label}"
+    # assert preds[1] == label, f"Incorrect prediction for transformed: '{transformed}' -> predicted {preds[1]}, expected {label}"
+
