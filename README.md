@@ -115,7 +115,7 @@ Ideal output:
 3. Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
     
     ```bash
-    bandit -r .
+    bandit -r . -c bandit.yaml
     ```
 
 Ideal output: 

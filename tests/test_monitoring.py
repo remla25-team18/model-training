@@ -5,6 +5,8 @@ test_monitoring.py
 import pytest
 from joblib import load
 
+# pylint: disable=redefined-outer-name
+
 
 @pytest.fixture()
 def monitoring_setup():

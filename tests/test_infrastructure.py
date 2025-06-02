@@ -2,11 +2,13 @@
 test_infrastructure.py
 """
 
-import pytest
 import os
+import pytest
 from joblib import load
 from src.modeling.train import train
 from src.modeling.evaluate import evaluate
+
+# pylint: disable=redefined-outer-name
 
 
 @pytest.fixture()

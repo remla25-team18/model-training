@@ -6,6 +6,8 @@ import pytest
 import numpy as np
 from joblib import load
 
+# pylint: disable=redefined-outer-name
+
 
 @pytest.fixture()
 def data_setup():
@@ -50,8 +52,8 @@ def test_no_missing_values(data_setup):
     """
     corpus, y = data_setup
     # Check for missing values
-    for i in range(len(corpus)):
-        if not corpus[i]:
+    for i, doc in enumerate(corpus):
+        if not doc:
             print(f"Missing value found in corpus at index {i}")
     assert all(corpus), "Corpus contains missing values"
     assert None not in y, "Labels contain missing values"

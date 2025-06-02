@@ -6,6 +6,8 @@ import pytest
 import numpy as np
 from joblib import load
 
+# pylint: disable=redefined-outer-name
+
 
 @pytest.fixture()
 def model_and_data_setup():
