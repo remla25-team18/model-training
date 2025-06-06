@@ -2,8 +2,15 @@
 test_monitoring.py
 """
 
+import time
+import tracemalloc
 import pytest
 from joblib import load
+
+# pylint: disable=redefined-outer-name
+
+MAX_MEMORY_MB = 10  # adjust
+MAX_LATENCY_SECS = 0.5  # adjust
 
 
 @pytest.fixture()
@@ -70,3 +77,42 @@ def test_data_invariants(monitoring_setup):
 
     # Check if model classes match unique labels in y
     assert set(model.classes_) == set(y), "Model classes do not match unique labels in y"
+
+
+def test_prediction_memory_usage(monitoring_setup):
+    """
+    Test to ensure memory usage is within acceptable limits.
+    Measures the peak memory usage during the model prediction of the test set.
+    """
+    _, _, model, _, _, X_test, _ = monitoring_setup
+
+    tracemalloc.start()
+
+    model.predict(X_test)
+
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    peak_mb = peak / 1024 ** 2
+
+    assert peak_mb < MAX_MEMORY_MB, f"Memory usage too high: {peak_mb:.2f} MB (limit: {MAX_MEMORY_MB} MB)"
+
+
+def test_prediction_latency(monitoring_setup):
+    """
+    Test to ensure model prediction latency is within acceptable limits.
+    Measures the wall-clock time taken to run model.predict(X_test).
+    """
+    _, _, model, _, _, X_test, _ = monitoring_setup
+
+    start_time = time.time()
+
+    model.predict(X_test)
+
+    end_time = time.time()
+    latency_secs = end_time - start_time
+
+    assert latency_secs < MAX_LATENCY_SECS, (
+        f"Prediction latency too high: {latency_secs:.3f} s "
+        f"(limit: {MAX_LATENCY_SECS} s)"
+    )

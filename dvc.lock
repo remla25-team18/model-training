@@ -10,8 +10,8 @@ stages:
     outs:
     - path: tmp/corpus.joblib
       hash: md5
-      md5: 0eec825902a57af520ea457aea67fc7a
-      size: 34535
+      md5: 243212bb05cce5e3fdc72bfd2826d329
+      size: 31612
     - path: tmp/raw_labels.joblib
       hash: md5
       md5: e72f7dc91beee28dbae42e6464fc57ed
@@ -25,8 +25,8 @@ stages:
       size: 1601
     - path: tmp/corpus.joblib
       hash: md5
-      md5: 0eec825902a57af520ea457aea67fc7a
-      size: 34535
+      md5: 243212bb05cce5e3fdc72bfd2826d329
+      size: 31612
     - path: tmp/raw_labels.joblib
       hash: md5
       md5: e72f7dc91beee28dbae42e6464fc57ed
@@ -34,16 +34,16 @@ stages:
     outs:
     - path: tmp/X.joblib
       hash: md5
-      md5: 7c19b1a33956a0046c7f0e925a4e7680
+      md5: 4fe6d9cac6bd6b0e5a796e576b9e7029
       size: 10212865
     - path: tmp/corpus_processed.joblib
       hash: md5
-      md5: 0fe50df584227d9c38f207af3af24ba0
-      size: 34532
+      md5: d6f2d2228a9a7b97d3818914d0f8427c
+      size: 31609
     - path: tmp/cv.joblib
       hash: md5
-      md5: 56b1c4950543f7a6268e490fdad66a1f
-      size: 40514
+      md5: 8a7b03107782bfcb05aa2dfe40cac520
+      size: 39442
     - path: tmp/y.joblib
       hash: md5
       md5: 02609bd21a184a5a416fbc0db97162ff
@@ -53,16 +53,16 @@ stages:
     deps:
     - path: ./src/modeling/train.py
       hash: md5
-      md5: dc2f404476cf1bfdf51a2d573bac78b7
-      size: 1432
+      md5: 4a168753bfc62fe096c7f6dfb63bb13c
+      size: 1478
     outs:
     - path: tmp/X_test.joblib
       hash: md5
-      md5: 31b8014c7019db08decf6864bb2c2287
+      md5: 83ca11d00be1ce3328e7fef4f0c151ef
       size: 3067425
     - path: tmp/model.joblib
       hash: md5
-      md5: d2edab6260e875035d2ac836cfbf27a5
+      md5: e6774ecbad963b5cd0b5c24973c05847
       size: 46215
     - path: tmp/y_test.joblib
       hash: md5
@@ -77,11 +77,11 @@ stages:
       size: 1093
     - path: tmp/X_test.joblib
       hash: md5
-      md5: 31b8014c7019db08decf6864bb2c2287
+      md5: 83ca11d00be1ce3328e7fef4f0c151ef
       size: 3067425
     - path: tmp/model.joblib
       hash: md5
-      md5: d2edab6260e875035d2ac836cfbf27a5
+      md5: e6774ecbad963b5cd0b5c24973c05847
       size: 46215
     - path: tmp/y_test.joblib
       hash: md5
@@ -90,5 +90,5 @@ stages:
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: 8c4cab3edd5df1ae8ce7ddd9265556f7
-      size: 74
+      md5: c7cd87eac73fe04a5b24944846965de4
+      size: 75

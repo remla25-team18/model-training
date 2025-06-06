@@ -30,6 +30,7 @@ def train(joblib_output_dir, model_output_dir, test_size: float = 0.30, seed: in
     dump(model, joblib_output_dir + "model.joblib")
     dump(X_test, joblib_output_dir + "X_test.joblib")
     dump(y_test, joblib_output_dir + "y_test.joblib")
+    dump(cv, joblib_output_dir + "cv.joblib")
 
     # Save the model and vectorizer
     print("Saving model and vectorizer...")
