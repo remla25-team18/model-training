@@ -1,170 +1,173 @@
-# Model training
+# Restaurant Sentiment Classification – ML Configuration and Testing
 
-## Continuous Integration Metrics
+This repository implements an end-to-end machine learning pipeline for sentiment classification using the [Cookiecutter Data Science template](https://github.com/drivendataorg/cookiecutter-data-science). It adheres to best practices in configuration management and ML testing, and supports reproducibility through [DVC](https://dvc.org/), [GitHub Actions](https://docs.github.com/en/actions), and rigorous automated testing based on the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).
 
-The following metrics are automatically updated with each push via GitHub Actions:
-The pytests and coverae report can also be done manually. For the relevant commands, first following the instructions below and then run the command found in the workflow.
+---
+| Metric            | Badge                    |
+|------------------|--------------------------|
+| Test Coverage     | ![coverage](coverage.svg) |
+| Pylint Score      | ![pylint-score](pylint.svg) |
+---
 
-| Metric | Badge |
-|--------|-------|
-| **Test Coverage** | ![coverage](coverage.svg) |
-| **Pylint Score** | ![pylint-score](pylint.svg) * |
+## 1. Project Setup and Installation
 
-* work in progress
+### Conda Environment
 
-## Installation
+1. Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and initialize it in your shell:
+    ```bash
+    source ~/.bashrc  # or source ~/.zshrc
+    ```
 
-1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-command-prompt) for a lightweight Python environment according to your OS:
-
-    - During installation, **type "yes" when prompted to initialize Miniconda in your shell** (this adds initialization to `.bashrc` or `.bash_profile`).
-    - After installation, reload your shell configuration:
-
-      ```bash
-      source ~/.bashrc
-      ```
-
-    - Verify the installation:
-
-      ```bash
-      conda --version
-      ```
-
-      You should see the installed conda version.
-
-2. Create and activate a new conda environment with Python 3.11:
-
+2. Create a new environment:
     ```bash
     conda create -n ml python=3.11
     conda activate ml
     ```
 
-3. Install the required packages using pip:
-
+3. Install dependencies:
     ```bash
     pip install -e .
     ```
 
-4. Run dvc using `dvc repro`, you should see the following output:
+---
 
-    ```plaintext
-    Running stage 'get_data':    
-    Added stage 'get_data' in 'dvc.yaml'
-    Updating lock file 'dvc.lock'                           
+## 2. Running the Pipeline with DVC
 
-    Running stage 'data_preprocess':                                                       
-    > python ./src/data/pre_process.py
-    Data saved to tmp directory.
-    Updating lock file 'dvc.lock'                                                          
+The ML pipeline is managed with DVC and consists of the following stages:
+- `get_data`: download and preprocess raw data
+- `data_preprocess`: vectorize and clean the corpus
+- `train`: train a Naive Bayes classifier
+- `evaluate`: evaluate and output performance metrics
 
-    Running stage 'train':                                                                 
-    > python ./src/model/train.py
-    Saving model and vectorizer...
-    Updating lock file 'dvc.lock'                                                          
+Run the full pipeline with:
+```bash
+dvc repro
+```
 
-    Running stage 'evaluate':                                                              
-    > python ./src/model/evaluate.py
-    Confusion_matrix:  [[ 79  47]
-                        [ 27 117]]
-    Accuracy:  0.725925925925926
-    ```
+Example output:
+```
+Running stage 'get_data':    
+> python ./src/data/get_data.py
+Added stage 'get_data' in 'dvc.yaml'
+Updating lock file 'dvc.lock'                           
 
-    The metrics are saved in `metrics.json` file under the `metrics/` directory of the project, you can check the metrics using:
+Running stage 'data_preprocess':                                                       
+> python ./src/data/pre_process.py
+Data saved to tmp directory.
+Updating lock file 'dvc.lock'                                                          
 
-    ```bash
-    dvc metrics show
-    ```
+Running stage 'train':                                                                 
+> python ./src/model/train.py
+Saving model and vectorizer...
+Updating lock file 'dvc.lock'                                                          
 
-5. [**GDrive secret needed**] You can also push and pull the data to and from the remote storage(Google Drive) using:
+Running stage 'evaluate':                                                              
+> python ./src/model/evaluate.py
+Confusion_matrix:  [[ 79  47]
+                    [ 27 117]]
+Accuracy:  0.725925925925926
+```
 
-    ```bash
-    dvc push
-    dvc pull
-    ```
+To inspect results:
+```bash
+dvc metrics show
+```
 
-## Instructions on how to set up remote storage
+---
 
-In `./src/get_data.py`, you can set up remote storage for DVC. We used Google Drive as remote storage.
+## 3. Remote Data and Model Storage (DVC)
 
-The link to the drive folder is automatically set and is open to everyone.
+This project uses **public Google Drive remote** to version datasets and models. No authentication or secrets are required to access the data.
 
-## Code Quality
+If you want to explore the dvc versioning system, you need to configure remote storage (Google Drive):
 
-1. Pylint has a non-standard configuration, which can be checked in pylintrc, and one custom rule for the ML code smell Randomness Uncontrolled, which can be checked in linter_rules/pylint. To run pylint use:
+```bash
+dvc remote add -d gdrive gdrive://<your-folder-id>
+dvc remote modify gdrive gdrive_use_service_account true
+```
 
-    ```bash
-    pylint .
-    ```
-Ideal output:
+Push/pull artifacts:
+```bash
+dvc push
+dvc pull
+```
 
-    Your code has been rated at 10.00/10
+> The pipeline uses a public Google Drive folder set in `src/dataset/get_data.py`.
 
-2. Flake8 had a non-default configuration, which can be checked in linter_rules/flake8. To run flake8 use:
+---
 
-    ```bash
-    pip install -e linter_rules/flake8 --use-pep517
-    flake8 . --verbose
-    ```
+## 4. Code Quality and Linting
 
-Ideal output:
+We use three linters with customized rules:
+- **Pylint**: configured in `pylintrc` with custom ML code smell rules
+- **Flake8**: configured in `linter_rules/flake8`
+- **Bandit**: configured in `bandit.yaml` for security scanning
 
-    flake8.checker            MainProcess     89 INFO     Making checkers
-    flake8.main.application   MainProcess    136 INFO     Finished running
-    flake8.main.application   MainProcess    136 INFO     Reporting errors
-    flake8.main.application   MainProcess    137 INFO     Found a total of 0 violations and reported 0'
+Run them via:
+```bash
+pylint .
+flake8 . --verbose
+bandit -r . -c bandit.yaml
+```
 
-3. Bandit has a non-default configuration, which can be checked in bandit.yaml. To run bandit use:
-    
-    ```bash
-    bandit -r . -c bandit.yaml
-    ```
+All linters are integrated into the CI pipeline.
 
-Ideal output: 
+---
 
-    [main]  INFO    profile include tests: None
-    [main]  INFO    profile exclude tests: None
-    [main]  INFO    cli include tests: None
-    [main]  INFO    cli exclude tests: None
-    [main]  INFO    running on Python 3.11.11
-    Run started:2025-05-25 20:55:57.477128
+## 5. Automated Testing
 
-    Test results:
-            No issues identified.
+Our test suite follows the ML Test Score methodology and includes tests for:
 
-    Code scanned:
-            Total lines of code: 203
-            Total lines skipped (#nosec): 0
+- **Feature and Data Integrity**: `tests/test_data.py`
+- **Model Development**: `tests/test_model.py`
+- **ML Infrastructure**: `tests/test_infrastructure.py`
+- **Monitoring** (latency, memory): `tests/test_monitoring.py`
+- **Metamorphic Testing**: `tests/test_mutamorphic.py` (semantic equivalence checks)
 
-    Run metrics:
-            Total issues (by severity):
-                    Undefined: 0
-                    Low: 0
-                    Medium: 0
-                    High: 0
-            Total issues (by confidence):
-                    Undefined: 0
-                    Low: 0
-                    Medium: 0
-                    High: 0
-    Files skipped (0):
-
-All three linters are automatically run as part of the GitHub workflow.
-
-## Automated Tests
-
-The tests follow the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/) methodology to measure test adequacy and there is at least one test per category: 
-- Feature and Data in tests/test_data.py;
-- Model Development in tests/test_model.py;
-- ML Infrastructure in tests/test_infrastructure.py;
-- Monitoring in tests/test_monitoring.py.
-
-The model's robustness is tested on semantically equivalent reviews in tests/test_mutamorphic.py.
-
-Non-functional requirements, namely memory usage and latency for prediction, are tested in tests/test_monitoring.py.
-
-To run all tests, use the following command:
-
+Run all tests with coverage:
 ```bash
 pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/ | tee pytest-coverage.txt
 ```
 
-The coverage report is both printed in the terminal and saved as an XML and txt files, to have both a human-readable and machine-readable format available.
+---
+
+## 6. Continuous Integration and Metrics Reporting
+
+GitHub Actions automatically run:
+- Linting (Pylint, Flake8, Bandit)
+- Pytest with coverage
+- Updates to README metrics badges
+
+---
+
+## 7. Exploratory Code
+
+An exploratory notebook is stored in the `notebooks/` directory and kept separate from production code under `src/`. You can run it interactively to explore the dataset, visualize vocabulary features, and inspect misclassifications.
+
+---
+
+## 8. Directory Structure
+
+```
+├── .dvc/                     # DVC internal files
+├── .github/workflows/        # GitHub Actions CI configuration
+├── data/                     # Raw and processed data (DVC-tracked)
+├── linter_rules/             # Custom linter rules (e.g. flake8 config)
+├── notebooks/                # Jupyter notebooks for exploratory analysis
+├── src/                      # Source code for data processing and modeling
+│   ├── dataset/              # Data loading and preprocessing scripts
+│   └── modeling/             # Model training and evaluation logic
+├── tests/                    # Test suite following ML Test Score categories
+├── .dvcignore                # DVC ignore file
+├── .gitignore                # Git ignore file
+├── Makefile                  # Commands for reproducible execution
+├── README.md                 # Project documentation
+├── bandit.yaml               # Bandit configuration for security linting
+├── coverage.svg              # Auto-generated test coverage badge
+├── dvc.lock                  # DVC lock file for pipeline reproducibility
+├── dvc.yaml                  # DVC pipeline definition
+├── pylintrc                  # Pylint configuration (non-standard)
+├── pyproject.toml            # Project metadata and formatting tools
+├── pytest-coverage.txt       # Output of pytest coverage report
+├── setup.cfg                 # Additional config for tools (e.g., pytest)
+```
