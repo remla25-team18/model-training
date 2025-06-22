@@ -38,4 +38,4 @@ src/modeling/train.py           24      1    96%   47
 TOTAL                           87     46    47%
 Coverage XML written to file coverage.xml
 FAIL Required test coverage of 50.0% not reached. Total coverage: 47.13%
-============================== 13 passed in 1.06s ==============================
+============================== 13 passed in 1.26s ==============================
