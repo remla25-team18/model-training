@@ -4,21 +4,18 @@ cachedir: .pytest_cache
 rootdir: /home/madaplacido/Desktop/TUD/remla-project/model-training
 configfile: pyproject.toml
 plugins: cov-6.1.1, hydra-core-1.3.2
-collecting ... collected 13 items
+collecting ... collected 10 items
 
-tests/test_data.py::test_correct_format PASSED                           [  7%]
-tests/test_data.py::test_no_missing_values PASSED                        [ 15%]
-tests/test_data.py::test_labels_in_the_test_distributed_proportionally PASSED [ 23%]
-tests/test_infrastructure.py::test_if_files_saved_correctly PASSED       [ 30%]
-tests/test_infrastructure.py::test_reproducibility PASSED                [ 38%]
-tests/test_model.py::test_model_performance PASSED                       [ 46%]
-tests/test_monitoring.py::test_data_invariants PASSED                    [ 53%]
-tests/test_monitoring.py::test_prediction_memory_usage PASSED            [ 61%]
-tests/test_monitoring.py::test_prediction_latency PASSED                 [ 69%]
-tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] PASSED [ 76%]
-tests/test_mutamorphic.py::test_metamorphic_review_consistency[Waited too long.-The wait was very long.-0] PASSED [ 84%]
-tests/test_mutamorphic.py::test_metamorphic_review_consistency[Pretty loud inside.-Kinda noisy indoors.-0] PASSED [ 92%]
-tests/test_mutamorphic.py::test_metamorphic_review_consistency[The pasta was bland.-The pasta lacked flavor.-0] PASSED [100%]
+tests/test_data.py::test_correct_format PASSED                           [ 10%]
+tests/test_data.py::test_no_missing_values PASSED                        [ 20%]
+tests/test_data.py::test_labels_in_the_test_distributed_proportionally PASSED [ 30%]
+tests/test_infrastructure.py::test_if_files_saved_correctly PASSED       [ 40%]
+tests/test_infrastructure.py::test_reproducibility PASSED                [ 50%]
+tests/test_model.py::test_model_performance PASSED                       [ 60%]
+tests/test_monitoring.py::test_data_invariants PASSED                    [ 70%]
+tests/test_monitoring.py::test_prediction_memory_usage PASSED            [ 80%]
+tests/test_monitoring.py::test_prediction_latency PASSED                 [ 90%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] PASSED [100%]
 ERROR: Coverage failure: total of 47 is less than fail-under=50
 
 
@@ -38,4 +35,4 @@ src/modeling/train.py           24      1    96%   47
 TOTAL                           87     46    47%
 Coverage XML written to file coverage.xml
 FAIL Required test coverage of 50.0% not reached. Total coverage: 47.13%
-============================== 13 passed in 1.26s ==============================
+============================== 10 passed in 1.01s ==============================
