@@ -75,24 +75,41 @@ dvc metrics show
 
 ---
 
-## 3. Remote Data and Model Storage (DVC)
+## 3. Google Drive Remote Storage
 
-This project uses **public Google Drive remote** to version datasets and models. No authentication or secrets are required to access the data.
+1. This project uses **public Google Drive remote** to version datasets and models. No authentication or secrets are required to access the data.
 
-If you want to explore the dvc versioning system, you need to configure remote storage (Google Drive):
+    > The pipeline uses a public Google Drive folder set in `src/dataset/get_data.py`.
 
-```bash
-dvc remote add -d gdrive gdrive://<your-folder-id>
-dvc remote modify gdrive gdrive_use_service_account true
-```
+2.  If you want to explore the dvc versioning system, you need to configure remote storage of Google Drive. The registration process can be found in [Set up google drive auth](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive#using-a-custom-google-cloud-project-recommended). After setting up, you can contact the admin(lemonhe@tudelft.nl) to add your account to the trust list. Then, you can add the remote storage to your DVC project:
 
-Push/pull artifacts:
-```bash
-dvc push
-dvc pull
-```
+    ```bash
+    dvc remote modify gdrive gdrive_client_id [id]
+    dvc remote modify gdrive gdrive_client_secret [secret]
+    ```
 
-> The pipeline uses a public Google Drive folder set in `src/dataset/get_data.py`.
+    To push/pull artifacts, use:
+
+    ```bash
+    dvc push
+    dvc pull
+    ```
+
+    You will see output like:
+    ```
+    (test) model-training % dvc pull
+    Collecting                                                                                                                                 |0.00 [00:00,    ?entry/s]
+    Fetching
+    Building workspace index                                                                                                                   |12.0 [00:00,  966entry/s]
+    Comparing indexes                                                                                                                         |13.0 [00:00, 5.61kentry/s]
+    Applying changes                                                                                                                           |0.00 [00:00,     ?file/s]
+    Everything is up to date.
+    (test) model-training % dvc push
+    Collecting                                                                                                                                 |0.00 [00:00,    ?entry/s]
+    Pushing
+    5 files pushed                                       
+    ```
+
 
 ---
 

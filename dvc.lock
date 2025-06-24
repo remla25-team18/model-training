@@ -42,8 +42,8 @@ stages:
       size: 31609
     - path: tmp/cv.joblib
       hash: md5
-      md5: 8a7b03107782bfcb05aa2dfe40cac520
-      size: 39442
+      md5: 7f03811e93a56c7a096d8290b67256ef
+      size: 39444
     - path: tmp/y.joblib
       hash: md5
       md5: 02609bd21a184a5a416fbc0db97162ff

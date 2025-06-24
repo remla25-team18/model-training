@@ -25,6 +25,7 @@ dependencies = [
     "lib-ml @ git+https://github.com/remla25-team18/lib-ml.git@v0.0.8",
     "dvc==3.59.2",
     "gdown==5.2.0",
+    "dvc_gdrive==3.0.1",
     "pytest==8.3.5",
     "pytest-cov==6.1.1",
     "pylint==3.3.7",
