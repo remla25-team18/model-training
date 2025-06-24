@@ -1,8 +1,10 @@
 """
 train.py
 """
+
 import datetime
 import os
+import argparse
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from joblib import load, dump
@@ -44,7 +46,14 @@ def train(joblib_output_dir, model_output_dir, test_size: float = 0.30, seed: in
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--test_size", type=float, default=0.3)
+    args = parser.parse_args()
+
     train(
         joblib_output_dir="tmp/",
         model_output_dir="./models/",
+        test_size=args.test_size,
+        seed=args.seed,
     )
