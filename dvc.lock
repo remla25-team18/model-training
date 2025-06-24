@@ -49,24 +49,24 @@ stages:
       md5: 02609bd21a184a5a416fbc0db97162ff
       size: 7417
   train:
-    cmd: python ./src/modeling/train.py
+    cmd: python ./src/modeling/train.py --seed 27 --test_size 0.3
     deps:
     - path: ./src/modeling/train.py
       hash: md5
-      md5: 4a168753bfc62fe096c7f6dfb63bb13c
-      size: 1478
+      md5: 8ffa9144eef2d874ae99db2b165713ae
+      size: 1744
     outs:
     - path: tmp/X_test.joblib
       hash: md5
-      md5: 83ca11d00be1ce3328e7fef4f0c151ef
+      md5: 83d558e88502f133f73e5bec62403ca7
       size: 3067425
     - path: tmp/model.joblib
       hash: md5
-      md5: e6774ecbad963b5cd0b5c24973c05847
+      md5: 98e9d757986c8c77b1b38ffb3bea6a95
       size: 46215
     - path: tmp/y_test.joblib
       hash: md5
-      md5: 972032116aad48a20c08103ae08660f6
+      md5: a5d9507490411e0c130a4ef57931441c
       size: 2385
   evaluate:
     cmd: python ./src/modeling/evaluate.py
@@ -77,18 +77,18 @@ stages:
       size: 1093
     - path: tmp/X_test.joblib
       hash: md5
-      md5: 83ca11d00be1ce3328e7fef4f0c151ef
+      md5: 83d558e88502f133f73e5bec62403ca7
       size: 3067425
     - path: tmp/model.joblib
       hash: md5
-      md5: e6774ecbad963b5cd0b5c24973c05847
+      md5: 98e9d757986c8c77b1b38ffb3bea6a95
       size: 46215
     - path: tmp/y_test.joblib
       hash: md5
-      md5: 972032116aad48a20c08103ae08660f6
+      md5: a5d9507490411e0c130a4ef57931441c
       size: 2385
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: c7cd87eac73fe04a5b24944846965de4
+      md5: 1098851f71ea966d0bbaba5d8388ee3f
       size: 75
