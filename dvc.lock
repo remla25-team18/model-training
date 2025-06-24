@@ -73,8 +73,8 @@ stages:
     deps:
     - path: ./src/modeling/evaluate.py
       hash: md5
-      md5: add598ce7fb5746949534cf56f51f842
-      size: 1093
+      md5: b709e20b6c9aeabe0c536c353cce9f9a
+      size: 1185
     - path: tmp/X_test.joblib
       hash: md5
       md5: 83d558e88502f133f73e5bec62403ca7
@@ -90,5 +90,5 @@ stages:
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: 1098851f71ea966d0bbaba5d8388ee3f
-      size: 75
+      md5: 0e10c4f3703d679ffa48471be8b703ff
+      size: 196

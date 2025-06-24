@@ -39,6 +39,7 @@ The ML pipeline is managed with DVC and consists of the following stages:
 - `train`: train a Naive Bayes classifier
 - `evaluate`: evaluate and output performance metrics
 
+#### Run Pipeline 
 Run the full pipeline with:
 ```bash
 dvc repro
@@ -65,28 +66,41 @@ Running stage 'evaluate':
 > python ./src/model/evaluate.py
 Confusion_matrix:  [[ 79  47]
                     [ 27 117]]
-Accuracy:  0.725925925925926
+Accuracy: 0.7037, Precision: 0.8036, Recall: 0.6081
 ```
+
+#### Inspecting Results
 
 To inspect results:
 ```bash
 dvc metrics show
 ```
 
+The output will look like:
+```
+(test) model-training % dvc metrics show
+Path                  accuracy    precision    recall
+metrics/metrics.json  0.7037      0.80357      0.60811
+```
+
+#### Experimentation with DVC
+
 Try different experiments by modifying parameters in the `train` stage inside `dvc.yaml` and re-running the pipeline. DVC will track changes and allow you to compare results.
 
-After chaning it, re-run the pipeline to see updated metrics:
+After changing it, re-run the pipeline to see updated metrics:
 ```bash
 dvc exp run
 dvc exp show
 ```
+
 You will see output like:
 
-| Experiment             | Created  | Accuracy |
-|------------------------|----------|----------|
-| workspace              | –        | 0.7037   |
-| lemon/a4_fix           | 07:17 PM | 0.68148  |
-| └── 9092e4d [brisk-cedi] | 07:27 PM | 0.7037   |
+| Experiment               | Created  | Accuracy | Precision | Recall  |
+|--------------------------|----------|----------|-----------|---------|
+| workspace                | –        | 0.7037   | 0.80357   | 0.60811 |
+| 927bc96 [pithy-suit]     | 07:34 PM | 0.7037   | 0.80357   | 0.60811 |
+| d5ecd14 [dizzy-rise]     | 07:34 PM | 0.68148  | 0.77358   | 0.56944 |
+
 
 
 ---
