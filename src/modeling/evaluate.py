@@ -9,6 +9,10 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 
 
 def evaluate(joblib_output_dir, json_output_dir):
+    """
+    Evaluated the model
+    """
+
     model = load(joblib_output_dir + "model.joblib")
     X_test = load(joblib_output_dir + "X_test.joblib")
     y_test = load(joblib_output_dir + "y_test.joblib")

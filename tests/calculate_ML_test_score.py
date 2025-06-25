@@ -2,9 +2,13 @@ import os
 
 
 def count_pattern(filename, pattern):
+    """
+    Counts the amount a pattern appears in the given file
+    """
+
     count = 0
     if os.path.exists(filename):
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding="utf-8") as f:
             for line in f:
                 if pattern in line:
                     count += 1
@@ -14,6 +18,10 @@ def count_pattern(filename, pattern):
 
 
 def main():
+    """
+    Calculates the ML test score
+    """
+
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     pattern_per_file = {
