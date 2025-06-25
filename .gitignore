@@ -251,3 +251,8 @@ dmypy.json
 
 More actions
 
+tmp/
+/tmp
+models/
+metrics/
+data/raw/
