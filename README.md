@@ -5,7 +5,7 @@ This repository implements an end-to-end machine learning pipeline for sentiment
 | Metric | Badge |
 |--------|-------|
 | **Test Coverage** | ![coverage](coverage.svg) |
-| **Pylint Score** | ![pylint](https://img.shields.io/badge/pylint-9.79-yellow?logo=python&logoColor=white) |
+| **Pylint Score** | ![pylint](pylint-badge.svg) |
 | **ML Test Score** | ![ml-test-score](badge-ML-test-score.svg) |
 
 ## 1. Project Setup and Installation
