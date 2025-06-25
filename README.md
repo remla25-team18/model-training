@@ -1,6 +1,6 @@
 # Restaurant Sentiment Classification – ML Configuration and Testing
 
-This repository implements an end-to-end machine learning pipeline for sentiment classification using the [Cookiecutter Data Science template](https://github.com/drivendataorg/cookiecutter-data-science). It adheres to best practices in configuration management and ML testing, and supports reproducibility through [DVC](https://dvc.org/), [GitHub Actions](https://docs.github.com/en/actions), and rigorous automated testing based on the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/). 
+This repository implements an end-to-end machine learning pipeline for sentiment classification using the [Cookiecutter Data Science template](https://github.com/drivendataorg/cookiecutter-data-science). It adheres to best practices in configuration management and ML testing, and supports reproducibility through [DVC](https://dvc.org/), [GitHub Actions](https://docs.github.com/en/actions), and rigorous automated testing based on the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).
 
 | Metric | Badge |
 |--------|-------|
