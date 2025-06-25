@@ -1,5 +1,6 @@
 import os
 
+
 def count_pattern(filename, pattern):
     count = 0
     if os.path.exists(filename):
@@ -10,6 +11,7 @@ def count_pattern(filename, pattern):
     else:
         print(f"Warning: {filename} does not exist.")
     return count
+
 
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +32,7 @@ def main():
     # ML Test Score (minimum value of all categories)
     min_count = min(ml_test_scores.values())
     return min_count
+
 
 if __name__ == "__main__":
     main()

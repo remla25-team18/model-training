@@ -39,7 +39,7 @@ jobs:
             - name: Determine badge color
               id: color
               run: |
-                score=${{ steps.run_score.outputs.score }}
+                score=${{ steps.score.outputs.score }}
                 if [ "$score" -ge 3 ]; then
                   color="brightgreen"
                 elif [ "$score" -ge 2 ]; then
