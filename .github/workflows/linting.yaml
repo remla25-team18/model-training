@@ -23,6 +23,15 @@ jobs:
         run: |
           pylint .
 
+      - uses: Silleellie/pylint-github-action@v2.1
+        with:
+          lint-path: |
+            src
+            tests
+          python-version: 3.11
+          pylintrc-path: pylintrc
+          requirements-path: pyproject.toml
+
       - name: Run flake8
         run: |
           pip install -e linter_rules/flake8 --use-pep517
