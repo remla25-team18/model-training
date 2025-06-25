@@ -254,5 +254,6 @@ More actions
 # dvc
 tmp/
 /tmp
+models/
 metrics/
 data/raw/
