@@ -9,6 +9,7 @@ The pytests and coverae report can also be done manually. For the relevant comma
 |--------|-------|
 | **Test Coverage** | ![coverage](coverage.svg) |
 | **Pylint Score** | ![pylint](https://img.shields.io/badge/pylint-00.00-lightgrey) |
+| **ML Test Score** | wip |
 
 ## Installation
 
