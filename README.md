@@ -153,7 +153,7 @@ Pushing
 ## 4. Code Quality and Linting
 
 We use three linters with customized rules:
-- **Pylint**: configured in `pylintrc` with custom ML code smell rules
+- **Pylint**: configured in `pylintrc` and `linter_rules/pylint` with custom ML code smell rules
 - **Flake8**: configured in `linter_rules/flake8`
 - **Bandit**: configured in `bandit.yaml` for security scanning
 
