@@ -249,7 +249,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-/tmp
 models/
 metrics/
 data/raw/
