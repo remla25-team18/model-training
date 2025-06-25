@@ -698,11 +698,11 @@ paths_setup = ('tmp/', 'metrics/')
             ), f"{file} not found in {joblib_output_dir}"
 E           AssertionError: model.joblib not found in tmp/
 E           assert False
-E            +  where False = <function isfile at 0x7f9d7a107f60>('tmp/model.joblib')
-E            +    where <function isfile at 0x7f9d7a107f60> = <module 'posixpath' (frozen)>.isfile
+E            +  where False = <function isfile at 0x7fea76707f60>('tmp/model.joblib')
+E            +    where <function isfile at 0x7fea76707f60> = <module 'posixpath' (frozen)>.isfile
 E            +      where <module 'posixpath' (frozen)> = os.path
-E            +    and   'tmp/model.joblib' = <function join at 0x7f9d7a1107c0>('tmp/', 'model.joblib')
-E            +      where <function join at 0x7f9d7a1107c0> = <module 'posixpath' (frozen)>.join
+E            +    and   'tmp/model.joblib' = <function join at 0x7fea767107c0>('tmp/', 'model.joblib')
+E            +      where <function join at 0x7fea767107c0> = <module 'posixpath' (frozen)>.join
 E            +        where <module 'posixpath' (frozen)> = os.path
 
 tests/test_infrastructure.py:43: AssertionError
@@ -722,7 +722,7 @@ paths_setup = ('tmp/', 'metrics/')
 
 tests/test_infrastructure.py:62: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-src/modeling/train.py:16: in train
+src/modeling/train.py:18: in train
     X = load(joblib_output_dir + "X.joblib")
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
@@ -803,20 +803,20 @@ src/dataset/__init__.py          0      0   100%
 src/dataset/get_data.py         19     19     0%   5-44
 src/dataset/pre_process.py      25     25     0%   5-58
 src/modeling/__init__.py         0      0   100%
-src/modeling/evaluate.py        19     13    32%   15-35, 39
-src/modeling/train.py           24     16    33%   17-43, 47
+src/modeling/evaluate.py        21     15    29%   12-35, 39
+src/modeling/train.py           29     20    31%   19-45, 49-54
 ----------------------------------------------------------
-TOTAL                           87     73    16%
+TOTAL                           94     79    16%
 Coverage XML written to file coverage.xml
-FAIL Required test coverage of 50.0% not reached. Total coverage: 16.09%
+FAIL Required test coverage of 50.0% not reached. Total coverage: 15.96%
 =========================== short test summary info ============================
 FAILED tests/test_infrastructure.py::test_if_files_saved_correctly - AssertionError: model.joblib not found in tmp/
 assert False
- +  where False = <function isfile at 0x7f9d7a107f60>('tmp/model.joblib')
- +    where <function isfile at 0x7f9d7a107f60> = <module 'posixpath' (frozen)>.isfile
+ +  where False = <function isfile at 0x7fea76707f60>('tmp/model.joblib')
+ +    where <function isfile at 0x7fea76707f60> = <module 'posixpath' (frozen)>.isfile
  +      where <module 'posixpath' (frozen)> = os.path
- +    and   'tmp/model.joblib' = <function join at 0x7f9d7a1107c0>('tmp/', 'model.joblib')
- +      where <function join at 0x7f9d7a1107c0> = <module 'posixpath' (frozen)>.join
+ +    and   'tmp/model.joblib' = <function join at 0x7fea767107c0>('tmp/', 'model.joblib')
+ +      where <function join at 0x7fea767107c0> = <module 'posixpath' (frozen)>.join
  +        where <module 'posixpath' (frozen)> = os.path
 FAILED tests/test_infrastructure.py::test_reproducibility - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/X.joblib'
 ERROR tests/test_data.py::test_correct_format - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
@@ -827,4 +827,4 @@ ERROR tests/test_monitoring.py::test_data_invariants - FileNotFoundError: [Errno
 ERROR tests/test_monitoring.py::test_prediction_memory_usage - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
 ERROR tests/test_monitoring.py::test_prediction_latency - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
 ERROR tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/model.joblib'
-========================= 2 failed, 8 errors in 1.92s ==========================
+========================= 2 failed, 8 errors in 1.55s ==========================
