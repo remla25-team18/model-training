@@ -33,9 +33,11 @@ jobs:
             - name: Calculate ML test score
               id: score
               run: |
-                score=$(python tests/calculate_ML_test_score.py)
+                score=`python tests/calculate_ML_test_score.py`
+                score2=$(python tests/calculate_ML_test_score.py)
                 echo "score=$score" >> $GITHUB_OUTPUT
-                echo $score
+                echo "score: $score"
+                echo "score2: $score2"
 
             - name: Determine badge color
               id: color

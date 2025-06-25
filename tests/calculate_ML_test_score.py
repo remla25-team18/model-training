@@ -31,6 +31,7 @@ def main():
 
     # ML Test Score (minimum value of all categories)
     min_count = min(ml_test_scores.values())
+    print(min_count)
     return min_count
 
 
