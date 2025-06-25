@@ -27,6 +27,9 @@ jobs:
           pylint src
           pylint tests
 
+      - name: Generate requirements.txt from pyproject.toml
+        run: python generate_requirements.py
+
       - uses: Silleellie/pylint-github-action@v2.1
         with:
           lint-path: |
