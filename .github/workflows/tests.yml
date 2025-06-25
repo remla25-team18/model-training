@@ -49,6 +49,9 @@ jobs:
                 fi
                 echo "color=$color" >> $GITHUB_OUTPUT
 
+            - name: Debug score
+              run: echo "score ${{ steps.score.outputs.score }} and color ${{ steps.color.outputs.color }}"
+
             - name: Generate ML test score badge
               uses: emibcn/badge-action@v1
               with:
