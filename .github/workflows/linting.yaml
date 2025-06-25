@@ -76,5 +76,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Update pylint badge [skip ci]"
-            git push origin HEAD:main
+            git fetch origin main
+            git merge origin/main --no-edit || git merge --abort
+            git push origin HEAD:main  
           fi
