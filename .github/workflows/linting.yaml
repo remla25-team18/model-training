@@ -15,6 +15,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout branch
+        run: git checkout ${{ github.ref_name }}
+
       - name: Sync local git repo with remote
         run: |
           git fetch origin main

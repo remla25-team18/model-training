@@ -1,3 +1,7 @@
+"""
+calculate_ml_test_score.py
+"""
+
 import os
 
 
@@ -19,7 +23,7 @@ def count_pattern(filename, pattern):
 
 def main():
     """
-    Calculates the ML test score
+    Calculates the ml test score
     """
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
