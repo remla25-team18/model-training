@@ -12,13 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Sync local git repo with remote
-        run: |
-          git fetch origin main
-          git reset --hard origin/main
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
@@ -54,19 +47,3 @@ jobs:
       - name: Run bandit
         run: |
           bandit -r . -c bandit.yaml
-
-      - name: Sync branch before committing badge updates
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git fetch origin main
-          git reset --hard origin/main
-
-      - name: Commit and push pylint badge updates
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: github-actions
-          author_email: github-actions@github.com
-          message: "Updated pylint badge [skip ci]"
-          push: true
-          branch: main
