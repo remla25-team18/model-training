@@ -1,9 +1,0 @@
-/corpus.joblib
-/raw_labels.joblib
-/corpus_processed.joblib
-/X.joblib
-/y.joblib
-/cv.joblib
-/model.joblib
-/X_test.joblib
-/y_test.joblib
