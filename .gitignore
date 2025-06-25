@@ -251,6 +251,7 @@ dmypy.json
 
 More actions
 
+# dvc
 tmp/
 /tmp
 models/
