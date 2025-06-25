@@ -29,15 +29,53 @@ jobs:
                 pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/ | tee pytest-coverage.txt
                 cat pytest-coverage.txt
                 coverage-badge -o coverage.svg -f
+
+            - name: Calculate ML test score
+              id: score
+              run: |
+                score=`python tests/calculate_ML_test_score.py`
+                echo "score=$score" >> $GITHUB_OUTPUT
+
+            - name: Determine badge color
+              id: color
+              run: |
+                score=${{ steps.score.outputs.score }}
+                if [ "$score" -ge 2 ]; then
+                  color="brightgreen"
+                elif [ "$score" -ge 1 ]; then
+                  color="yellow"
+                else
+                  color="red"
+                fi
+                echo "color=$color" >> $GITHUB_OUTPUT
+
+            - name: Debug score
+              run: echo "score ${{ steps.score.outputs.score }} and color ${{ steps.color.outputs.color }}"
+
+            - name: Generate ML test score badge
+              uses: emibcn/badge-action@v1
+              with:
+                label: 'ML Test Score'
+                status: ${{ steps.score.outputs.score }}
+                color: ${{ steps.color.outputs.color }}
+                path: badge-ML-test-score.svg
             
             - name: Commit changes
               run: |
-                git config user.name github-actions
-                git config user.email github-actions@github.com
-                git add coverage.svg
-                if ! git diff --cached --quiet; then
-                    git commit -m "Update coverage badge"
-                    git push
+                git config user.name "github-actions"
+                git config user.email "github-actions@github.com"
+
+                BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+                git stash push -m "temp-stash"
+                git fetch origin "$BRANCH_NAME"
+                git checkout "$BRANCH_NAME"
+                git pull --rebase origin "$BRANCH_NAME"
+                git stash pop || true
+
+                git add pytest-coverage.txt coverage.svg badge-ML-test-score.svg
+                if git diff --cached --quiet; then
+                  echo "No changes to commit"
                 else
-                    echo "No changes to commit."
+                  git commit -m "Update coverage and ML test score badges [skip ci]"
+                  git push
                 fi

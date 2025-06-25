@@ -2,12 +2,11 @@
 
 This repository implements an end-to-end machine learning pipeline for sentiment classification using the [Cookiecutter Data Science template](https://github.com/drivendataorg/cookiecutter-data-science). It adheres to best practices in configuration management and ML testing, and supports reproducibility through [DVC](https://dvc.org/), [GitHub Actions](https://docs.github.com/en/actions), and rigorous automated testing based on the [ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).
 
----
-| Metric            | Badge                    |
-|------------------|--------------------------|
-| Test Coverage     | ![coverage](coverage.svg) |
-| Pylint Score      | ![pylint-score](pylint.svg) |
----
+| Metric | Badge |
+|--------|-------|
+| **Test Coverage** | ![coverage](coverage.svg) |
+| **Pylint Score** | ![pylint](https://img.shields.io/badge/pylint-9.79-yellow?logo=python&logoColor=white) |
+| **ML Test Score** | ![ml-test-score](badge-ML-test-score.svg) |
 
 ## 1. Project Setup and Installation
 

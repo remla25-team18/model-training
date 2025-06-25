@@ -3,6 +3,7 @@ stages:
     cmd: python ./src/dataset/get_data.py
     deps:
     - ./src/dataset/get_data.py
+    - pyproject.toml
     outs:
     - tmp/corpus.joblib
     - tmp/raw_labels.joblib
@@ -23,9 +24,12 @@ stages:
     cmd: python ./src/modeling/train.py --seed 27 --test_size 0.3
     deps:
     - ./src/modeling/train.py
+    - tmp/X.joblib
+    - tmp/y.joblib
+    - tmp/cv.joblib
     outs:
-    - tmp/X_test.joblib
     - tmp/model.joblib
+    - tmp/X_test.joblib
     - tmp/y_test.joblib
 
   evaluate:
@@ -40,3 +44,6 @@ stages:
 
 metrics:
   - metrics/metrics.json
+
+
+  

@@ -39,7 +39,7 @@ def test_data_invariants(monitoring_setup):
     """
     Test to ensure data invariants are maintained.
     This includes checking that the corpus and labels are not empty, shape and length checks.
-    ML Test Score, Monitor 2: Data invariants hold in training and serving inputs
+    !ML Test Score, Monitor 2: Data invariants hold in training and serving inputs
     """
     corpus, corpus_processed, model, X, y, X_test, y_test = monitoring_setup
 

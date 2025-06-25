@@ -2,6 +2,9 @@ name: Linting
 
 on: push
 
+permissions:
+  contents: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -21,7 +24,20 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint .
+          pylint src
+          pylint tests
+
+      - name: Generate requirements.txt from pyproject.toml
+        run: python generate_requirements.py
+
+      - uses: Silleellie/pylint-github-action@v2.1
+        with:
+          lint-path: |
+            src
+            tests
+          python-version: 3.11
+          pylintrc-path: pylintrc
+          badge-text: pylint
 
       - name: Run flake8
         run: |
