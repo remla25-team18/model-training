@@ -160,6 +160,7 @@ We use three linters with customized rules:
 Run them via:
 ```bash
 pylint .
+pip install -e linter_rules/flake8 --use-pep517
 flake8 . --verbose
 bandit -r . -c bandit.yaml
 ```
@@ -180,7 +181,7 @@ Our test suite follows the ML Test Score methodology and includes tests for:
 
 Run all tests with coverage:
 ```bash
-pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/ | tee pytest-coverage.txt
+pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/
 ```
 
 ---

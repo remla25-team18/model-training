@@ -9,8 +9,8 @@ stages:
       size: 1332
     - path: pyproject.toml
       hash: md5
-      md5: abd1c2b6d4a756210f433c33eb91ebbf
-      size: 1220
+      md5: 599e17d1fe4f0f28d576927edbb0953e
+      size: 1268
     outs:
     - path: tmp/corpus.joblib
       hash: md5
@@ -46,8 +46,8 @@ stages:
       size: 31609
     - path: tmp/cv.joblib
       hash: md5
-      md5: 7f03811e93a56c7a096d8290b67256ef
-      size: 39444
+      md5: 8a7b03107782bfcb05aa2dfe40cac520
+      size: 39442
     - path: tmp/y.joblib
       hash: md5
       md5: 02609bd21a184a5a416fbc0db97162ff
@@ -57,8 +57,8 @@ stages:
     deps:
     - path: ./src/modeling/train.py
       hash: md5
-      md5: a20046e031118860f1d415b4dcd588f2
-      size: 1484
+      md5: 8ffa9144eef2d874ae99db2b165713ae
+      size: 1744
     - path: tmp/X.joblib
       hash: md5
       md5: 4fe6d9cac6bd6b0e5a796e576b9e7029
