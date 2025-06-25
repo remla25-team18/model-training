@@ -21,7 +21,7 @@ stages:
     - tmp/cv.joblib
     
   train:
-    cmd: python ./src/modeling/train.py
+    cmd: python ./src/modeling/train.py --seed 27 --test_size 0.3
     deps:
     - ./src/modeling/train.py
     - tmp/X.joblib
