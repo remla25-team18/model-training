@@ -9,8 +9,8 @@ stages:
       size: 1332
     - path: pyproject.toml
       hash: md5
-      md5: 599e17d1fe4f0f28d576927edbb0953e
-      size: 1268
+      md5: e23d4896390c7e0ff763228a8e515be4
+      size: 1227
     outs:
     - path: tmp/corpus.joblib
       hash: md5

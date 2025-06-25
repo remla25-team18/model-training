@@ -248,3 +248,11 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+More actions
+
+tmp/
+/tmp
+models/
+metrics/
+data/raw/
