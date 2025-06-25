@@ -1,26 +1,800 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.11.11, pytest-8.3.5, pluggy-1.6.0 -- /home/madaplacido/miniconda3/envs/ml/bin/python3.11
+platform linux -- Python 3.11.12, pytest-8.3.5, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.11.12/x64/bin/python
 cachedir: .pytest_cache
-rootdir: /home/madaplacido/Desktop/TUD/remla-project/model-training
+rootdir: /home/runner/work/model-training/model-training
 configfile: pyproject.toml
-plugins: cov-6.1.1, hydra-core-1.3.2
+plugins: anyio-4.9.0, cov-6.1.1, hydra-core-1.3.2
 collecting ... collected 10 items
 
-tests/test_data.py::test_correct_format PASSED                           [ 10%]
-tests/test_data.py::test_no_missing_values PASSED                        [ 20%]
-tests/test_data.py::test_labels_in_the_test_distributed_proportionally PASSED [ 30%]
-tests/test_infrastructure.py::test_if_files_saved_correctly PASSED       [ 40%]
-tests/test_infrastructure.py::test_reproducibility PASSED                [ 50%]
-tests/test_model.py::test_model_performance PASSED                       [ 60%]
-tests/test_monitoring.py::test_data_invariants PASSED                    [ 70%]
-tests/test_monitoring.py::test_prediction_memory_usage PASSED            [ 80%]
-tests/test_monitoring.py::test_prediction_latency PASSED                 [ 90%]
-tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] PASSED [100%]
-ERROR: Coverage failure: total of 47 is less than fail-under=50
+tests/test_data.py::test_correct_format ERROR                            [ 10%]
+tests/test_data.py::test_no_missing_values ERROR                         [ 20%]
+tests/test_data.py::test_labels_in_the_test_distributed_proportionally ERROR [ 30%]
+tests/test_infrastructure.py::test_if_files_saved_correctly FAILED       [ 40%]
+tests/test_infrastructure.py::test_reproducibility FAILED                [ 50%]
+tests/test_model.py::test_model_performance ERROR                        [ 60%]
+tests/test_monitoring.py::test_data_invariants ERROR                     [ 70%]
+tests/test_monitoring.py::test_prediction_memory_usage ERROR             [ 80%]
+tests/test_monitoring.py::test_prediction_latency ERROR                  [ 90%]
+tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] ERROR [100%]
+ERROR: Coverage failure: total of 16 is less than fail-under=50
 
 
+==================================== ERRORS ====================================
+____________________ ERROR at setup of test_correct_format _____________________
+
+    @pytest.fixture()
+    def data_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the corpus and labels
+        """
+>       corpus = load("tmp/corpus_processed.joblib")
+
+tests/test_data.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus_processed.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+___________________ ERROR at setup of test_no_missing_values ___________________
+
+    @pytest.fixture()
+    def data_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the corpus and labels
+        """
+>       corpus = load("tmp/corpus_processed.joblib")
+
+tests/test_data.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus_processed.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+_____ ERROR at setup of test_labels_in_the_test_distributed_proportionally _____
+
+    @pytest.fixture()
+    def data_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the corpus and labels
+        """
+>       corpus = load("tmp/corpus_processed.joblib")
+
+tests/test_data.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus_processed.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+___________________ ERROR at setup of test_model_performance ___________________
+
+    @pytest.fixture()
+    def model_and_data_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the model, X_test, and y_test
+        """
+        joblib_output_dir = "tmp/"
+>       model = load(joblib_output_dir + "model.joblib")
+
+tests/test_model.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/model.joblib', mmap_mode = None, ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/model.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+____________________ ERROR at setup of test_data_invariants ____________________
+
+    @pytest.fixture()
+    def monitoring_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the model and test data
+        """
+        joblib_output_dir = "tmp/"
+>       corpus = load(joblib_output_dir + "corpus.joblib")
+
+tests/test_monitoring.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+________________ ERROR at setup of test_prediction_memory_usage ________________
+
+    @pytest.fixture()
+    def monitoring_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the model and test data
+        """
+        joblib_output_dir = "tmp/"
+>       corpus = load(joblib_output_dir + "corpus.joblib")
+
+tests/test_monitoring.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+__________________ ERROR at setup of test_prediction_latency ___________________
+
+    @pytest.fixture()
+    def monitoring_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the model and test data
+        """
+        joblib_output_dir = "tmp/"
+>       corpus = load(joblib_output_dir + "corpus.joblib")
+
+tests/test_monitoring.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/corpus.joblib', mmap_mode = None
+ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+_ ERROR at setup of test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] _
+
+    @pytest.fixture()
+    def model_setup():
+        """
+        Setup function to prepare the environment for testing
+        Returns the model
+        """
+        joblib_output_dir = "tmp/"
+>       model = load(joblib_output_dir + "model.joblib")
+
+tests/test_mutamorphic.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/model.joblib', mmap_mode = None, ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/model.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
+=================================== FAILURES ===================================
+________________________ test_if_files_saved_correctly _________________________
+
+paths_setup = ('tmp/', 'metrics/')
+
+    def test_if_files_saved_correctly(paths_setup):
+        """
+        Check if the necessary files are saved correctly in the specified directories.
+        """
+    
+        joblib_output_dir, json_output_dir = paths_setup
+        # Check if all joblib files exist
+        joblib_files = [
+            "model.joblib",
+            "corpus.joblib",
+            "cv.joblib",
+            "X.joblib",
+            "y.joblib",
+            "X_test.joblib",
+            "y_test.joblib",
+        ]
+        for file in joblib_files:
+>           assert os.path.isfile(
+                os.path.join(joblib_output_dir, file)
+            ), f"{file} not found in {joblib_output_dir}"
+E           AssertionError: model.joblib not found in tmp/
+E           assert False
+E            +  where False = <function isfile at 0x7efc5c707f60>('tmp/model.joblib')
+E            +    where <function isfile at 0x7efc5c707f60> = <module 'posixpath' (frozen)>.isfile
+E            +      where <module 'posixpath' (frozen)> = os.path
+E            +    and   'tmp/model.joblib' = <function join at 0x7efc5c7107c0>('tmp/', 'model.joblib')
+E            +      where <function join at 0x7efc5c7107c0> = <module 'posixpath' (frozen)>.join
+E            +        where <module 'posixpath' (frozen)> = os.path
+
+tests/test_infrastructure.py:43: AssertionError
+_____________________________ test_reproducibility _____________________________
+
+paths_setup = ('tmp/', 'metrics/')
+
+    def test_reproducibility(paths_setup):
+        """
+        Check that running the model training multiple times produces the same results.
+        !ML Test Score, Infra 1: Training is reproducible.
+        """
+        joblib_output_dir, json_output_dir = paths_setup
+    
+        # Run the training function
+>       train(joblib_output_dir=joblib_output_dir, model_output_dir="./models/")
+
+tests/test_infrastructure.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/modeling/train.py:16: in train
+    X = load(joblib_output_dir + "X.joblib")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filename = 'tmp/X.joblib', mmap_mode = None, ensure_native_byte_order = True
+
+    def load(filename, mmap_mode=None, ensure_native_byte_order="auto"):
+        """Reconstruct a Python object from a file persisted with joblib.dump.
+    
+        Read more in the :ref:`User Guide <persistence>`.
+    
+        WARNING: joblib.load relies on the pickle module and can therefore
+        execute arbitrary Python code. It should therefore never be used
+        to load files from untrusted sources.
+    
+        Parameters
+        ----------
+        filename: str, pathlib.Path, or file object.
+            The file object or path of the file from which to load the object
+        mmap_mode: {None, 'r+', 'r', 'w+', 'c'}, optional
+            If not None, the arrays are memory-mapped from the disk. This
+            mode has no effect for compressed files. Note that in this
+            case the reconstructed object might no longer match exactly
+            the originally pickled object.
+        ensure_native_byte_order: bool, or 'auto', default=='auto'
+            If True, ensures that the byte order of the loaded arrays matches the
+            native byte ordering (or _endianness_) of the host system. This is not
+            compatible with memory-mapped arrays and using non-null `mmap_mode`
+            parameter at the same time will raise an error. The default 'auto'
+            parameter is equivalent to True if `mmap_mode` is None, else False.
+    
+        Returns
+        -------
+        result: any Python object
+            The object stored in the file.
+    
+        See Also
+        --------
+        joblib.dump : function to save an object
+    
+        Notes
+        -----
+    
+        This function can load numpy array files saved separately during the
+        dump. If the mmap_mode argument is given, it is passed to np.load and
+        arrays are loaded as memmaps. As a consequence, the reconstructed
+        object might not match the original pickled object. Note that if the
+        file was saved with compression, the arrays cannot be memmapped.
+        """
+        if ensure_native_byte_order == "auto":
+            ensure_native_byte_order = mmap_mode is None
+    
+        if ensure_native_byte_order and mmap_mode is not None:
+            raise ValueError(
+                "Native byte ordering can only be enforced if 'mmap_mode' parameter "
+                f"is set to None, but got 'mmap_mode={mmap_mode}' instead."
+            )
+    
+        if Path is not None and isinstance(filename, Path):
+            filename = str(filename)
+    
+        if hasattr(filename, "read"):
+            fobj = filename
+            filename = getattr(fobj, "name", "")
+            with _validate_fileobject_and_memmap(fobj, filename, mmap_mode) as (fobj, _):
+                obj = _unpickle(fobj, ensure_native_byte_order=ensure_native_byte_order)
+        else:
+>           with open(filename, "rb") as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'tmp/X.joblib'
+
+/opt/hostedtoolcache/Python/3.11.12/x64/lib/python3.11/site-packages/joblib/numpy_pickle.py:735: FileNotFoundError
 ================================ tests coverage ================================
-_______________ coverage: platform linux, python 3.11.11-final-0 _______________
+_______________ coverage: platform linux, python 3.11.12-final-0 _______________
 
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
@@ -29,10 +803,28 @@ src/dataset/__init__.py          0      0   100%
 src/dataset/get_data.py         19     19     0%   5-44
 src/dataset/pre_process.py      25     25     0%   5-58
 src/modeling/__init__.py         0      0   100%
-src/modeling/evaluate.py        19      1    95%   39
-src/modeling/train.py           24      1    96%   47
+src/modeling/evaluate.py        19     13    32%   15-35, 39
+src/modeling/train.py           24     16    33%   17-43, 47
 ----------------------------------------------------------
-TOTAL                           87     46    47%
+TOTAL                           87     73    16%
 Coverage XML written to file coverage.xml
-FAIL Required test coverage of 50.0% not reached. Total coverage: 47.13%
-============================== 10 passed in 1.01s ==============================
+FAIL Required test coverage of 50.0% not reached. Total coverage: 16.09%
+=========================== short test summary info ============================
+FAILED tests/test_infrastructure.py::test_if_files_saved_correctly - AssertionError: model.joblib not found in tmp/
+assert False
+ +  where False = <function isfile at 0x7efc5c707f60>('tmp/model.joblib')
+ +    where <function isfile at 0x7efc5c707f60> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ +    and   'tmp/model.joblib' = <function join at 0x7efc5c7107c0>('tmp/', 'model.joblib')
+ +      where <function join at 0x7efc5c7107c0> = <module 'posixpath' (frozen)>.join
+ +        where <module 'posixpath' (frozen)> = os.path
+FAILED tests/test_infrastructure.py::test_reproducibility - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/X.joblib'
+ERROR tests/test_data.py::test_correct_format - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+ERROR tests/test_data.py::test_no_missing_values - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+ERROR tests/test_data.py::test_labels_in_the_test_distributed_proportionally - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus_processed.joblib'
+ERROR tests/test_model.py::test_model_performance - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/model.joblib'
+ERROR tests/test_monitoring.py::test_data_invariants - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+ERROR tests/test_monitoring.py::test_prediction_memory_usage - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+ERROR tests/test_monitoring.py::test_prediction_latency - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/corpus.joblib'
+ERROR tests/test_mutamorphic.py::test_metamorphic_review_consistency[A bit too salty.-Slightly too salty.-0] - FileNotFoundError: [Errno 2] No such file or directory: 'tmp/model.joblib'
+========================= 2 failed, 8 errors in 1.78s ==========================
