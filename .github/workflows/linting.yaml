@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pull latest changes
+        run: git pull origin main --rebase
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
