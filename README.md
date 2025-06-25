@@ -8,7 +8,7 @@ The pytests and coverae report can also be done manually. For the relevant comma
 | Metric | Badge |
 |--------|-------|
 | **Test Coverage** | ![coverage](coverage.svg) |
-| **Pylint Score** | ![pylint-score](![pylint]) * |
+| **Pylint Score** | ![pylint-score](![pylint](https://img.shields.io/badge/PyLint-8.25-yellow)) * |
 
 * work in progress
 
