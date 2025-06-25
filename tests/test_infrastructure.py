@@ -54,7 +54,7 @@ def test_if_files_saved_correctly(paths_setup):
 def test_reproducibility(paths_setup):
     """
     Check that running the model training multiple times produces the same results.
-    ML Test Score Infra 1: Training is reproducible.
+    !ML Test Score, Infra 1: Training is reproducible.
     """
     joblib_output_dir, json_output_dir = paths_setup
 

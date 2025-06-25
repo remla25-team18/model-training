@@ -29,7 +29,7 @@ def model_and_data_setup():
 def test_model_performance(model_and_data_setup):
     """
     Test to ensure the model performs as expected
-    ML Test Score, Model 5: A simpler model is not better
+    !ML Test Score, Model 5: A simpler model is not better
     """
     model, X_test, y_test = model_and_data_setup
     y_pred = model.predict(X_test)

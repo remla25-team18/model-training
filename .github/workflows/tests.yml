@@ -29,6 +29,33 @@ jobs:
                 pytest -v --cov=src --cov-report=xml --cov-report=term-missing tests/ | tee pytest-coverage.txt
                 cat pytest-coverage.txt
                 coverage-badge -o coverage.svg -f
+
+            - name: Calculate ML test score
+              id: score
+              run: |
+                score=$(python tests/calculate_ML_test_score.py)
+                echo "score=$score" >> $GITHUB_OUTPUT
+
+            - name: Determine badge color
+              id: color
+              run: |
+                score=${{ steps.run_score.outputs.score }}
+                if [ "$score" -ge 3 ]; then
+                  color="brightgreen"
+                elif [ "$score" -ge 2 ]; then
+                  color="yellow"
+                else
+                  color="red"
+                fi
+                echo "color=$color" >> $GITHUB_OUTPUT
+
+            - name: Generate ML test score badge
+              uses: emibcn/badge-action@v1
+              with:
+                label: 'ML Test Score'
+                status: ${{ steps.score.outputs.score }}
+                color: ${{ steps.color.outputs.color }}
+                path: badge-ML-test-score.svg
             
             - name: Commit changes
               run: |
