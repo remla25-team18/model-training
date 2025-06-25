@@ -27,20 +27,34 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint src
-          pylint tests
+          pylint .
 
-      - name: Generate requirements.txt from pyproject.toml
-        run: python generate_requirements.py
+      - name: Run pylint and extract score
+        id: pylint
+        run: |
+          OUTPUT=$(pylint src tests --exit-zero)
+          echo "$OUTPUT"
+          SCORE=$(echo "$OUTPUT" | grep "Your code has been rated at" | awk '{print $7}' | cut -d/ -f1)
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+      
+      - name: Determine badge color
+        id: color
+        run: |
+          score=${{ steps.pylint.outputs.score }}
+          if awk "BEGIN {exit !($score >= 9.5)}"; then
+            color="brightgreen"
+          elif awk "BEGIN {exit !($score >= 8)}"; then
+            color="orange"
+          elif awk "BEGIN {exit !($score >= 5)}"; then
+            color="yellow"
+          else
+            color="red"
+          fi
+          echo "color=$color" >> $GITHUB_OUTPUT
 
-      - uses: Silleellie/pylint-github-action@v2.1
-        with:
-          lint-path: |
-            src
-            tests
-          python-version: 3.11
-          pylintrc-path: pylintrc
-          badge-text: pylint
+      - name: Generate pylint badge SVG
+        run: |
+          curl -o pylint-badge.svg "https://img.shields.io/badge/pylint-${{ steps.pylint.outputs.score }}-${{ steps.color.outputs.color }}.svg"
 
       - name: Run flake8
         run: |
@@ -51,9 +65,16 @@ jobs:
         run: |
           bandit -r . -c bandit.yaml
 
-      - uses: EndBug/add-and-commit@v9
-        with:
-          author_name: "github-actions"
-          author_email: "github-actions@github.com"
-          message: 'Updated pylint badge'
-          branch: ${{ github.ref_name }}
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add pylint-badge.svg
+                
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update pylint badge [skip ci]"
+            git push origin HEAD:main
+          fi
