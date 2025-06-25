@@ -37,6 +37,7 @@ jobs:
             tests
           python-version: 3.11
           pylintrc-path: pylintrc
+          badge-text: pylint
 
       - name: Run flake8
         run: |
