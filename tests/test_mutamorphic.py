@@ -27,13 +27,13 @@ def model_setup():
 @pytest.mark.parametrize(
     "original, transformed, label",
     [
-        # ("The food was great.", "The food was amazing.", 1),
-        ("The food was nasty.", "The food was really bad.", 0),
-        # ("Waited too long.", "The wait was very long.", 0),
+        ("The food was great.", "The food was amazing.", 1),
+        # ("The food was nasty.", "The food was really bad.", 0),
+        ("Waited too long.", "The wait was very long.", 0),
         # ("Staff was friendly.", "The staff was nice.", 1),
         # ("Pretty loud inside.", "Kinda noisy indoors.", 0),
         # ("Service was fast.", "Service was quick.", 1),
-        # ("Good drink selection.", "Nice variety of drinks.", 1),
+        ("Good drink selection.", "Nice variety of drinks.", 1),
         # ("The pasta was bland.", "The pasta lacked flavor.", 0),
         # ("Amazing", "Terrible", 1),
     ]
