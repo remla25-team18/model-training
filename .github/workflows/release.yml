@@ -67,7 +67,7 @@ jobs:
         run: |
           git add VERSION
           git commit -m "Update VERSION file [skip ci]" || echo "No changes to commit"
-          git push "${{ env.remote_repo }}" HEAD:main
+          git push "${{ env.remote_repo }}" HEAD:${GITHUB_REF_NAME}
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -92,4 +92,4 @@ jobs:
           sed -i "s/^next-version: .*/next-version: $NEXT_VERSION/" GitVersion.yml
           git add GitVersion.yml
           git commit -m "Bump next-version to $NEXT_VERSION [skip ci]" || echo "No changes to commit"
-          git push "${{ env.remote_repo }}" HEAD:main
+          git push "${{ env.remote_repo }}" HEAD:${GITHUB_REF_NAME}
