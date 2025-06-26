@@ -4,3 +4,5 @@
     autostage = true
 ['remote "gdrive"']
     url = gdrive://1noP1yIZrFz3K0gbkiFGv9I1K4BJG_pOQ
+    gdrive_use_service_account = true
+    gdrive_service_account_json_file_path = tmp/gdrive_service_account.json
