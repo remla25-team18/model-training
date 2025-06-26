@@ -28,7 +28,7 @@ def model_setup():
     "original, transformed, label",
     [
         # ("The food was great.", "The food was amazing.", 1),
-        ("A bit too salty.", "Slightly too salty.", 0),
+        ("The food was nasty.", "The food was really bad.", 0),
         # ("Waited too long.", "The wait was very long.", 0),
         # ("Staff was friendly.", "The staff was nice.", 1),
         # ("Pretty loud inside.", "Kinda noisy indoors.", 0),
@@ -38,7 +38,7 @@ def model_setup():
         # ("Amazing", "Terrible", 1),
     ]
 )
-def test_metamorphic_review_consistency(model_setup, original, transformed, label):
+def test_mutamorphic_review_consistency(model_setup, original, transformed, label):
     """
     Test to assess the model's robustness by ensuring the model performs similarly on semantically equivalent reviews
     Mutamorphic Testing: Comparing outputs of test inputs with context-similar alternatives (e.g. okay vs. ﬁne)
