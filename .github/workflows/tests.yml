@@ -30,11 +30,7 @@ jobs:
 
             - name: Get GDrive Service Account Key
               run: |
-                mkdir -p .dvc/tmp
                 echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT }}" | base64 --decode > .dvc/tmp/gdrive_service_account.json
-                
-            - name: Pull DVC data
-              run: dvc pull -v
 
             - name: Run tests with pytest and coverage
               run: |
