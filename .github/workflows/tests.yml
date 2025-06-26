@@ -25,6 +25,9 @@ jobs:
                 pip install -e .[dev]
                 pip install dvc dvc[gdrive]
 
+            - name: Run DVC repro
+              run: dvc repro    
+
             - name: Get GDrive Service Account Key
               run: |
                 mkdir -p .dvc/tmp
