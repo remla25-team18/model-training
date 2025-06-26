@@ -67,6 +67,7 @@ jobs:
         run: |
           git add VERSION
           git commit -m "Update VERSION file [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin ${GITHUB_REF_NAME}
           git push "${{ env.remote_repo }}" HEAD:${GITHUB_REF_NAME}
 
       - name: Create Release
